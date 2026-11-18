@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Santagloria · Validar pase</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:#FAF8F5;color:#1D1D1B;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+  main{width:100%;max-width:380px}
+  .ic{width:104px;height:104px;border-radius:50%;margin:0 auto 26px;display:flex;align-items:center;justify-content:center;background:#E7F6EE;transition:background .3s}
+  .ic svg{width:52px;height:52px;fill:none;stroke:#1F9D63;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:d .5s .15s ease-out forwards}
+  @keyframes d{to{stroke-dashoffset:0}}
+  .w .ic{background:#FDEBD0}.w .ic svg{stroke:#C27700}.e .ic{background:#EEE}.e .ic svg{stroke:#737370}
+  .l .ic svg{animation:none;stroke-dashoffset:0;opacity:.25}
+  small{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#737370}
+  h1{font-family:Fraunces,'Cooper Black',Georgia,serif;font-size:34px;line-height:1.08;font-weight:800;color:#1C3152;margin:8px 0 6px}
+  .dto{display:inline-block;margin:10px 0 24px;background:#1D1D1B;color:#fff;font-weight:700;font-size:15px;padding:9px 18px;border-radius:999px}
+  .x .ic{background:#FCE9E7}.x .ic svg{stroke:#B4382B}
+  .n{font-size:14px;color:#737370}.n b{color:#1D1D1B}
+</style></head>
+<body><main id="m" class="l">
+<div class="ic"><svg viewBox="0 0 24 24"><path id="p" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+<small id="k">Validando…</small><h1 id="h">Un momento</h1>
+<div class="dto" id="d" style="display:none">10% de descuento</div>
+<p class="n" id="n"></p>
+</main>
+<script>
+const SCRIPT = "https://script.google.com/macros/s/AKfycbyqPQXWVfQGe0Kj3juiRFQRmHte_CDDWLREiBmKyhgcuLFIaL4s43OTSH3rgy_8lrajMw/exec";
+const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
+function show(cls, k, h, n, dto) { $('m').className = cls; $('k').textContent = k; $('h').textContent = h; $('n').innerHTML = n || ''; $('d').style.display = dto ? 'inline-block' : 'none'; }
+if (q.get('v') && new Date().toISOString().slice(0, 10) > q.get('v')) show('x', 'Pase caducado', q.get('e') || '', 'Caducó el ' + q.get('v').split('-').reverse().join('/') + '. No se aplica el descuento.');
+else if (!SCRIPT || !q.get('i') || !q.get('t')) show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
+else {
+  window.__r = r => {
+    if (!r || !r.ok) return show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
+    const co = r.empresa || q.get('e') || '';
+    if (r.repetido) show('w', 'Ya escaneado hace un momento', co, 'No se vuelve a contar. Hoy: <b>' + r.hoy + '</b> · Total: <b>' + r.total + '</b>', true);
+    else show('', 'Pase válido', co, 'Escaneo nº <b>' + r.hoy + '</b> de hoy · Total: <b>' + r.total + '</b>', true);
+  };
+  const s = document.createElement('script');
+  s.src = SCRIPT + '?a=r&i=' + encodeURIComponent(q.get('i')) + '&t=' + encodeURIComponent(q.get('t')) + '&e=' + encodeURIComponent(q.get('e') || '') + '&v=' + encodeURIComponent(q.get('v') || '') + '&cb=__r';
+  s.onerror = () => window.__r(null);
+  document.body.appendChild(s);
+}
+</script></body></html>
