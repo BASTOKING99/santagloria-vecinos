@@ -1,76 +1,123 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C3152">
 <title>Santagloria · Pedir catering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root{--navy:#1C3152;--amber:#E39A1E;--ink:#1D1D1B;--bg:#FAF8F5;--tint:#F1ECE2;--soft:#F6EFE1;--mute:#737370;--sh:0 1px 2px rgba(60,40,10,.05),0 12px 32px -16px rgba(60,40,10,.22)}
   *{box-sizing:border-box;margin:0}
-  body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:#FAF8F5;color:#1D1D1B;padding:26px 18px 96px;-webkit-text-size-adjust:100%}
-  main{max-width:460px;margin:0 auto}
-  .logo svg{height:30px;width:auto;display:block;margin:4px 0 22px}
-  .pill{display:inline-block;background:#FDEBD0;color:#9A5B04;font-size:13px;font-weight:700;padding:6px 13px;border-radius:999px;margin-bottom:14px}
-  h1{font-family:Fraunces,'Cooper Black',Georgia,serif;font-size:32px;line-height:1.08;font-weight:800;letter-spacing:-.01em;color:#1C3152;margin-bottom:10px}
-  h1 em{font-style:normal;color:#E39A1E}
-  .lead{font-size:16.5px;line-height:1.5;color:#4A4A46;margin-bottom:22px}
-  form{display:flex;flex-direction:column;gap:18px}
-  .f label,.f .lb{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#737370;margin-bottom:7px}
-  .f label i,.f .lb i{font-style:normal;font-weight:500;text-transform:none;letter-spacing:0}
-  input,select,textarea{width:100%;font:500 17px Jost,system-ui,sans-serif;color:#1D1D1B;background:#fff;border:1px solid #E3DCCF;border-radius:14px;padding:13px 14px;outline:0;appearance:none;-webkit-appearance:none}
-  textarea{resize:vertical;min-height:84px;line-height:1.4}
-  input:focus,select:focus,textarea:focus{border-color:#E39A1E;box-shadow:0 0 0 3px rgba(227,154,30,.18)}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .seg{display:flex;background:#EFE9DE;border-radius:999px;padding:4px}
-  .seg button{flex:1;border:0;background:none;font:600 15px Jost,sans-serif;padding:10px 8px;border-radius:999px;color:#6B665C;cursor:pointer}
-  .seg button.on{background:#fff;color:#1D1D1B;box-shadow:0 1px 3px rgba(0,0,0,.14)}
-  .step{display:flex;align-items:center;background:#fff;border:1px solid #E3DCCF;border-radius:14px;overflow:hidden}
-  .step button{border:0;background:none;width:54px;height:50px;font:600 24px Jost,sans-serif;color:#1C3152;cursor:pointer}
-  .step input{border:0;text-align:center;border-radius:0;padding:12px 0;font-weight:700;font-size:20px;box-shadow:none!important}
-  .hero{display:block;width:100%;height:178px;object-fit:cover;border-radius:22px;margin:0 0 18px}
-  .sec{background:#fff;border:1px solid #E3DCCF;border-radius:22px;overflow:hidden;margin-bottom:12px}
-  .sh{position:relative;display:flex;align-items:flex-end;justify-content:space-between;width:100%;height:118px;border:0;padding:16px 18px;cursor:pointer;background:#1C3152 center/cover no-repeat;text-align:left;color:#fff}
-  .sh::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,36,62,.82) 0%,rgba(20,36,62,.15) 70%)}
+  html{scroll-behavior:smooth}
+  body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  button{font-family:inherit}
+  .page{max-width:1160px;margin:0 auto;padding:0 18px}
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px}
+  .logo svg{height:28px;width:auto;display:block}
+  .top a{font:600 13.5px Jost,sans-serif;color:var(--navy);text-decoration:none;background:var(--tint);padding:9px 14px;border-radius:999px}
+  /* portada */
+  .hero{position:relative;border-radius:26px;overflow:hidden;color:#fff;min-height:250px;display:flex;align-items:flex-end;background:var(--navy) url(img/b-portada.webp) center/cover no-repeat}
+  .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,36,62,.9) 0%,rgba(20,36,62,.55) 55%,rgba(20,36,62,.1) 100%)}
+  .hero div{position:relative;padding:26px 22px 24px;max-width:640px}
+  .pill{display:inline-block;background:var(--amber);color:var(--ink);font-size:13px;font-weight:700;padding:6px 13px;border-radius:999px;margin-bottom:12px}
+  h1{font-family:Fraunces,'Cooper Black',Georgia,serif;font-size:clamp(28px,5vw,46px);line-height:1.05;font-weight:800;letter-spacing:-.01em}
+  h1 em{font-style:normal;color:#F6C26B}
+  .lead{font-size:clamp(15.5px,2.2vw,18px);line-height:1.5;margin-top:10px;opacity:.93}
+  /* distribución */
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:22px;align-items:start}
+  .cats{display:none}
+  .sec{scroll-margin-top:70px;margin-bottom:26px}
+  .sh{position:relative;display:flex;align-items:flex-end;justify-content:space-between;width:100%;height:112px;border:0;padding:16px 18px;cursor:pointer;background:var(--navy) center/cover no-repeat;text-align:left;color:#fff;border-radius:22px;overflow:hidden}
+  .sh::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,36,62,.82) 0%,rgba(20,36,62,.1) 75%)}
   .sh>*{position:relative}
   .ti{font:800 26px/1.05 Fraunces,Georgia,serif}
-  .cnt{position:absolute!important;top:12px;right:14px;background:#E39A1E;color:#1D1D1B;font:700 12px Jost,sans-serif;border-radius:999px;padding:4px 10px}
-  .ch{width:11px;height:11px;border-right:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(45deg);margin:0 4px 8px 12px;transition:transform .2s}
+  .cnt{position:absolute!important;top:12px;right:14px;background:var(--amber);color:var(--ink);font:700 12px Jost,sans-serif;border-radius:999px;padding:4px 10px}
+  .ch{width:10px;height:10px;border-right:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(45deg);margin:0 4px 8px 12px;transition:transform .2s}
   .sec.open .ch{transform:rotate(-135deg);margin-bottom:2px}
-  .bd{display:none}.sec.open .bd{display:block}
-  .card{padding:16px 16px 10px;border-top:1px solid #F0EBE1}
-  .ph{background:#F6EFE1;border-radius:16px;height:176px;display:flex;align-items:center;justify-content:center;margin-bottom:13px}
-  .ph img{max-height:150px;max-width:78%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(60,40,10,.18))}
-  .card h3{font:800 21px/1.12 Fraunces,Georgia,serif;color:#1C3152}
-  .sub{font-size:15.5px;color:#6B665C;margin-top:3px}
-  .tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .tg span{background:#F3EEE4;color:#4A4A46;font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:999px}
-  .nt{font-size:12.5px;color:#8A8578;margin:9px 0 2px}
-  .it{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:16px;border-top:1px solid #F5F0E7}
-  .card h3+.it,.card .nt+.it{margin-top:4px}
+  .bd{display:none;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:12px}
+  .sec.open .bd{display:grid}
+  .card{background:#fff;border-radius:22px;padding:14px 14px 10px;box-shadow:var(--sh)}
+  .ph{background:var(--soft);border-radius:16px;height:170px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .ph img{max-height:146px;max-width:78%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(60,40,10,.18))}
+  .card h3{font:800 20px/1.12 Fraunces,Georgia,serif;color:var(--navy);padding:0 2px}
+  .sub{font-size:15px;color:#6B665C;margin:3px 2px 0}
+  .tg{display:flex;flex-wrap:wrap;gap:6px;margin:10px 2px 0}
+  .tg span{background:var(--tint);color:#4A4A46;font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:999px}
+  .nt{font-size:12.5px;color:#8A8578;margin:9px 2px 4px}
+  .it{display:flex;align-items:center;gap:10px;padding:8px 8px;margin:0 -8px;font-size:16px;border-radius:14px;transition:background .15s}
+  .it:first-of-type{margin-top:6px}
   .it span{flex:1;line-height:1.25}.it small{display:block;font-size:12.5px;color:#8A8578;margin-top:2px}
-  .it em{font-style:normal;font-weight:600;color:#1C3152;font-size:15px;white-space:nowrap}
-  .q{display:flex;align-items:center;border:1px solid #E3DCCF;border-radius:999px;overflow:hidden;flex:none}
-  .q button{border:0;background:none;width:36px;height:36px;font:600 20px Jost,sans-serif;color:#1C3152;cursor:pointer}
-  .q i{font-style:normal;font-weight:700;min-width:22px;text-align:center}
-  .it.on .q{background:#1C3152;border-color:#1C3152}.it.on .q button,.it.on .q i{color:#fff}
-  .tot{margin-top:6px;font-size:15px;font-weight:600;color:#1C3152;text-align:right}
-  .bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-top:1px solid #E3DCCF}
-  .bar.show{display:block}.bar div{max-width:460px;margin:0 auto;display:flex;align-items:center;gap:12px}
-  .bar b{flex:1;font:700 16px Jost,sans-serif;color:#1C3152}
-  .bar button{border:0;background:#1D1D1B;color:#fff;font:700 15px Jost,sans-serif;padding:13px 20px;border-radius:14px;cursor:pointer}
-  .go{border:0;background:#1D1D1B;color:#fff;font:700 17px Jost,sans-serif;padding:17px;border-radius:16px;cursor:pointer;margin-top:4px}
+  .it em{font-style:normal;font-weight:600;color:var(--navy);font-size:15px;white-space:nowrap}
+  .it.on{background:var(--soft)}
+  .q{display:flex;align-items:center;background:var(--tint);border-radius:999px;flex:none}
+  .q button{border:0;background:none;width:36px;height:36px;font:600 20px Jost,sans-serif;color:var(--navy);cursor:pointer;border-radius:50%}
+  .q i{font-style:normal;font-weight:700;min-width:20px;text-align:center}
+  .it.on .q{background:var(--navy)}.it.on .q button,.it.on .q i{color:#fff}
+  /* pedido + formulario */
+  .side{background:#fff;border-radius:26px;padding:22px 20px;box-shadow:var(--sh)}
+  .side h2{font:800 24px/1.1 Fraunces,Georgia,serif;color:var(--navy);margin-bottom:12px}
+  #lines{list-style:none;padding:0;margin:0 0 4px}
+  #lines li{display:flex;align-items:center;gap:8px;padding:7px 0;font-size:15px;line-height:1.3}
+  #lines li span{flex:1}#lines li b{font-weight:600;color:var(--navy);white-space:nowrap}
+  #lines li button{border:0;background:var(--tint);color:var(--navy);width:26px;height:26px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;flex:none}
+  .empty{font-size:15px;color:var(--mute);background:var(--soft);border-radius:14px;padding:14px;text-align:center}
+  .tot{display:flex;justify-content:space-between;align-items:baseline;margin:10px 0 18px;padding:12px 14px;background:var(--soft);border-radius:14px;font-weight:700;color:var(--navy)}
+  .tot b{font:800 22px Fraunces,Georgia,serif}
+  form{display:flex;flex-direction:column;gap:16px}
+  .f label,.f .lb{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:7px}
+  .f label i,.f .lb i{font-style:normal;font-weight:500;text-transform:none;letter-spacing:0}
+  input,select,textarea{width:100%;font:500 17px Jost,system-ui,sans-serif;color:var(--ink);background:var(--tint);border:0;border-radius:14px;padding:14px;outline:0;appearance:none;-webkit-appearance:none;transition:box-shadow .15s,background .15s}
+  textarea{resize:vertical;min-height:84px;line-height:1.4}
+  input:focus,select:focus,textarea:focus{background:#fff;box-shadow:0 0 0 2px var(--amber)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .seg{display:flex;background:var(--tint);border-radius:999px;padding:4px}
+  .seg button{flex:1;border:0;background:none;font:600 15px Jost,sans-serif;padding:11px 8px;border-radius:999px;color:#6B665C;cursor:pointer}
+  .seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .step{display:flex;align-items:center;background:var(--tint);border-radius:14px;overflow:hidden}
+  .step button{border:0;background:none;width:54px;height:50px;font:600 24px Jost,sans-serif;color:var(--navy);cursor:pointer}
+  .step input{background:none;text-align:center;border-radius:0;padding:12px 0;font-weight:700;font-size:20px;box-shadow:none!important}
+  .go{border:0;background:var(--ink);color:#fff;font:700 17px Jost,sans-serif;padding:17px;border-radius:16px;cursor:pointer;margin-top:2px}
   .go:disabled{opacity:.55}
-  .note{font-size:13px;color:#737370;line-height:1.5;text-align:center;margin-top:2px}
+  .note{font-size:13px;color:var(--mute);line-height:1.5;text-align:center}
   .err{background:#FCE9E7;color:#8E2A20;border-radius:12px;padding:11px 14px;font-size:14px;display:none}
-  .done{display:none;text-align:center;padding-top:18px}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(250,248,245,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 -8px 24px -12px rgba(60,40,10,.25)}
+  .bar.show{display:block}.bar div{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:12px}
+  .bar b{flex:1;font:700 16px Jost,sans-serif;color:var(--navy)}
+  .bar button{border:0;background:var(--ink);color:#fff;font:700 15px Jost,sans-serif;padding:13px 22px;border-radius:14px;cursor:pointer}
+  /* confirmación */
+  .done{display:none;text-align:center;max-width:520px;margin:30px auto 0}
   .ok{width:92px;height:92px;border-radius:50%;background:#E7F6EE;margin:0 auto 22px;display:flex;align-items:center;justify-content:center}
   .ok svg{width:46px;height:46px;fill:none;stroke:#1F9D63;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  .done h1{color:var(--navy);font-size:34px}.done .lead{color:#4A4A46}
   .wa{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;background:#1FA855;color:#fff;font:700 17px Jost,sans-serif;padding:17px;border-radius:16px;margin:22px 0 10px}
-  .sum{background:#fff;border:1px solid #E8E2D9;border-radius:16px;padding:14px 18px;text-align:left;font-size:15px;line-height:1.55;margin-top:18px;white-space:pre-line}
-  .ref{font-size:13px;color:#737370;margin-top:6px}
-  footer{margin-top:34px;border-top:1px solid #E8E2D9;padding-top:16px;font-size:13px;color:#737370;line-height:1.5;text-align:center}
+  .sum{background:#fff;border-radius:18px;padding:16px 20px;text-align:left;font-size:15px;line-height:1.55;margin-top:18px;white-space:pre-line;box-shadow:var(--sh)}
+  .ref{font-size:13px;color:var(--mute);margin-top:8px}
+  footer{margin:40px 0 20px;padding-top:6px;font-size:13px;color:var(--mute);line-height:1.5;text-align:center}
+  /* ordenador */
+  @media (min-width:700px){
+    .bd{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (min-width:960px){
+    body{padding-bottom:0}
+    .page{padding:0 32px}
+    .top{padding:24px 0 18px}.logo svg{height:32px}
+    .hero{min-height:340px;border-radius:30px}.hero div{padding:44px 44px 40px}
+    .wrap{grid-template-columns:minmax(0,1fr) 400px;gap:34px;margin-top:30px}
+    .cats{display:flex;gap:8px;position:sticky;top:0;z-index:4;background:var(--bg);padding:12px 0;margin-bottom:6px}
+    .cats button{border:0;background:#fff;color:var(--navy);font:600 15px Jost,sans-serif;padding:10px 18px;border-radius:999px;cursor:pointer;box-shadow:var(--sh)}
+    .cats button:hover{background:var(--navy);color:#fff}
+    .sec{scroll-margin-top:76px}
+    .sh{height:132px;cursor:default;pointer-events:none;padding:20px 24px}.ti{font-size:32px}.ch{display:none}
+    .bd{display:grid!important}
+    .side{scrollbar-width:thin;scrollbar-color:#E3DCCF transparent;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:26px 24px}
+    .bar,.bar.show{display:none}
+  }
+  @media (min-width:1180px){.bd{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head>
-<body><main>
-<div class="logo"><svg width="182" height="39" viewBox="0 0 182 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+<body>
+<div class="page">
+<div class="top"><div class="logo"><svg width="182" height="39" viewBox="0 0 182 39" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M47.3 30C47.3 26.9 49.6001 24.7 52.6001 24.7C54.4001 24.7 55.8 25.4 56.7 26.6L55.9 27.2C55.1 26.2 54.0001 25.6 52.6001 25.6C50.2001 25.6 48.4 27.5 48.4 30C48.4 32.6 50.2 34.4 52.7 34.4C54.2 34.4 55.4 33.8 56.2 32.7L57 33.3C56 34.6 54.5001 35.4 52.6001 35.4C49.6001 35.4 47.3 33.1 47.3 30Z" fill="#1D1D1B"/>
 <path d="M57.9 32.7C57.9 31.2 59.1001 30 60.6001 30C62.1001 30 63.3 31.1 63.3 32.7C63.3 34.2 62.1001 35.3 60.6001 35.3C59.0001 35.4 57.9 34.2 57.9 32.7ZM62.3 32.7C62.3 31.6 61.6001 30.8 60.6001 30.8C59.6001 30.8 58.9 31.6 58.9 32.7C58.9 33.7 59.6001 34.5 60.6001 34.5C61.6001 34.5 62.3 33.8 62.3 32.7Z" fill="#1D1D1B"/>
 <path d="M68.6001 35.2H67.7V31H65.6001V35.2H64.7V31H64V30.2H64.7V25.9C64.7 24.8 65.3001 24.3 66.1001 24.3C66.6001 24.3 67 24.5 67.3 24.7L66.8 25.3C66.7 25.2 66.5 25.1 66.2 25.1C65.9 25.1 65.6001 25.3 65.6001 25.9V30.2H67.7V25.9C67.7 24.8 68.3 24.3 69.2 24.3C69.8 24.3 70.2 24.5 70.4 24.8L69.8 25.4C69.7 25.2 69.5 25.1 69.2 25.1C68.8 25.1 68.6001 25.3 68.6001 25.9V30.2H69.9V31H68.6001V35.2Z" fill="#1D1D1B"/>
@@ -85,30 +132,41 @@
 <path d="M127.8 30.2H128.9L130.4 33.7L131.9 30.2H132.9L129.4 38.5H128.4L129.9 34.8L127.8 30.2Z" fill="#1D1D1B"/>
 <path d="M54.5 2.79999H58.5V17.7H60.6V2.79999H64.6V0.899994H54.5V2.79999ZM47.6 13.3L35 0.100006V17.7H37.1V5.19998L49.7 18.4V0.899994H47.6V13.3ZM6.3 7.69998L5.1 7.19998C4.1 6.79998 2.8 6.09999 2.8 4.79999C2.8 3.29999 4.3 2.39999 5.6 2.39999C6.9 2.39999 7.7 2.9 8.3 4L10 3C9.1 1.4 7.5 0.5 5.7 0.5C3.2 0.5 0.699997 2.09999 0.699997 4.89999C0.699997 7.19999 2.4 8.29998 4.4 9.19998L5.6 9.69998C7 10.3 8.5 11.1 8.5 12.9C8.5 14.7 7.2 16.2 5.4 16.2C3.6 16.2 2.1 14.9 2.1 13L0 13.4C0.4 16.1 2.5 18.1 5.2 18.1C8.2 18.1 10.6 15.9 10.6 12.9C10.5 9.99999 8.7 8.59998 6.3 7.69998ZM14.4 17.7H16.7L17.9 15.1H27.1L28.3 17.7H30.6L22.6 0.199982L14.4 17.7ZM18.7 13.1L22.4 4.69998L26.1 13.1H18.7ZM150.6 5.60001C150.6 4.00001 149.8 2.40001 148.4 1.60001C147.1 0.800006 145.5 0.799988 144 0.799988H141.5V17.6H143.6V10.5H144.5L149.5 17.6H152L146.7 10.3C149 9.99999 150.6 8.00001 150.6 5.60001ZM144.1 8.79999H143.5V2.69998H144.1C146.2 2.69998 148.7 3.09998 148.7 5.69998C148.6 8.39998 146.3 8.79999 144.1 8.79999ZM156.8 17.7H158.9V0.899994H156.8V17.7ZM127.2 0.5C122.4 0.5 118.4 4.39999 118.4 9.29999C118.4 14.3 122.3 18.1 127.2 18.1C132.1 18.1 136 14.3 136 9.29999C136 4.39999 132 0.5 127.2 0.5ZM127.2 16.1C123.6 16.1 120.5 13.1 120.5 9.29999C120.5 5.59999 123.3 2.5 127.2 2.5C131.2 2.5 133.9 5.59999 133.9 9.29999C133.9 13.1 130.8 16.1 127.2 16.1ZM95.5 11.1H99.9C99.8 13.8 97 16.1 94.4 16.1C90.8 16.1 87.9 12.8 87.9 9.19998C87.9 5.39998 90.8 2.39999 94.6 2.39999C96.7 2.39999 98.7 3.50001 99.9 5.10001L101.4 3.69998C99.7 1.59998 97.2 0.399994 94.6 0.399994C89.8 0.399994 85.9 4.39998 85.9 9.19998C85.9 13.9 89.7 17.9 94.4 17.9C99.1 17.9 102.4 14.4 102.4 9.69998V9H95.5V11.1ZM109.7 0.799988H107.6V17.6H114.8V15.7H109.7V0.799988ZM66.1 17.7H68.4L69.6 15.1H78.8L80 17.7H82.3L74.3 0.199982L66.1 17.7ZM70.4 13.1L74.1 4.69998L77.8 13.1H70.4ZM171.5 0.100006L163.5 17.6H165.8L167 15H176.2L177.4 17.6H179.7L171.5 0.100006ZM167.8 13.1L171.5 4.69998L175.2 13.1H167.8Z" fill="#1D1D1B"/>
 <path d="M177 2.5C177 1.1 178.1 0 179.5 0C180.9 0 182 1 182 2.5C182 3.9 180.9 4.89999 179.5 4.89999C178.2 4.89999 177 3.9 177 2.5ZM181.6 2.5C181.6 1.3 180.7 0.399994 179.5 0.399994C178.3 0.399994 177.5 1.2 177.5 2.5C177.5 3.7 178.3 4.5 179.5 4.5C180.7 4.5 181.6 3.7 181.6 2.5ZM180.6 3.79999H180.1L179.7 3.10001C179.7 3.10001 179.6 3.10001 179.5 3.10001H179.2V3.79999H178.7V1.10001H179.5C180.3 1.10001 180.7 1.60001 180.7 2.10001C180.7 2.50001 180.5 2.8 180.2 3L180.6 3.79999ZM179.5 2.79999C180 2.79999 180.2 2.59998 180.2 2.19998C180.2 1.79998 180 1.60001 179.5 1.60001H179.2V2.79999H179.5Z" fill="#1D1D1B"/>
-</svg></div>
+</svg></div><a href="tel:+34646825202">Llamar · 646 825 202</a></div>
 <div id="form">
-  <div class="pill" id="pill">🥐 Catering para empresas</div>
-  <img class="hero" src="img/b-portada.webp" alt="Catering Santagloria">
-  <h1>Pedid vuestro catering en <em>un minuto</em></h1>
-  <p class="lead">Desayunos de equipo y reuniones con la carta de Santagloria. Elige lo que queráis y Xavi os confirma el total por WhatsApp. Sin compromiso.</p>
-  <form id="f" novalidate>
-    <div class="f"><label for="n">Tu nombre</label><input id="n" autocomplete="name" placeholder="Nombre y apellido"></div>
-    <div class="f"><label for="p">Tu móvil</label><input id="p" type="tel" inputmode="tel" autocomplete="tel" placeholder="6xx xxx xxx"></div>
-    <div class="f" id="coBox"><label for="e">Empresa</label><input id="e" autocomplete="organization" placeholder="Nombre de la empresa"></div>
-    <div class="row">
-      <div class="f"><label for="d">Día</label><input id="d" type="date"></div>
-      <div class="f"><label for="h">Hora</label><select id="h"></select></div>
+  <div class="hero"><div>
+    <span class="pill" id="pill">🥐 Catering para empresas</span>
+    <h1>Pedid vuestro catering en <em>un minuto</em></h1>
+    <p class="lead">Desayunos de equipo y reuniones con la carta de Santagloria. Elige lo que queráis y Xavi os confirma el total por WhatsApp. Sin compromiso.</p>
+  </div></div>
+  <div class="wrap">
+    <div class="menu">
+      <nav class="cats" id="cats" aria-label="Categorías"></nav>
+      <div id="carta"></div>
     </div>
-    <p class="note" style="margin:-8px 0 0;text-align:left">Con 24–48 h de antelación, de lunes a domingo.</p>
-    <div class="f"><span class="lb">Personas</span><div class="step"><button type="button" id="mn" aria-label="Menos">−</button><input id="g" inputmode="numeric" value="8"><button type="button" id="pl" aria-label="Más">+</button></div></div>
-    <div class="f"><span class="lb">La carta <i>(pulsa + en lo que queráis)</i></span><div id="carta"></div><div class="tot" id="tot">Todavía no has elegido nada</div></div>
-    <div class="f"><span class="lb">¿Lo llevamos o pasáis?</span><div class="seg" id="seg"><button type="button" data-m="Entrega en vuestra oficina" class="on">Lo llevamos</button><button type="button" data-m="Recogida en Santagloria (Gran Via 272)">Pasamos a recogerlo</button></div></div>
-    <div class="f" id="xBox"><label for="x">Dónde lo llevamos</label><input id="x" autocomplete="street-address" placeholder="Calle, número y planta"></div>
-    <div class="f"><label for="z">Alergias o algo más <i>(opcional)</i></label><textarea id="z" placeholder="Sin gluten, vegano, hora exacta de la reunión…"></textarea></div>
-    <div class="err" id="err"></div>
-    <button class="go" id="go" type="submit">Enviar pedido</button>
-    <p class="note">Al enviarlo te damos el botón para confirmarlo por WhatsApp con Xavi. El catering se paga por adelantado al reservar; Xavi te explica cómo.</p>
-  </form>
+    <aside class="side" id="side">
+      <h2>Tu pedido</h2>
+      <ul id="lines"></ul>
+      <div class="tot" id="totBox"><span>Total aprox.</span><b id="tot">0,00 €</b></div>
+      <form id="f" novalidate>
+        <div class="f"><label for="n">Tu nombre</label><input id="n" autocomplete="name" placeholder="Nombre y apellido"></div>
+        <div class="f"><label for="p">Tu móvil</label><input id="p" type="tel" inputmode="tel" autocomplete="tel" placeholder="6xx xxx xxx"></div>
+        <div class="f" id="coBox"><label for="e">Empresa</label><input id="e" autocomplete="organization" placeholder="Nombre de la empresa"></div>
+        <div class="row">
+          <div class="f"><label for="d">Día</label><input id="d" type="date"></div>
+          <div class="f"><label for="h">Hora</label><select id="h"></select></div>
+        </div>
+        <p class="note" style="margin:-8px 0 0;text-align:left">Con 24–48 h de antelación, de lunes a domingo.</p>
+        <div class="f"><span class="lb">Personas</span><div class="step"><button type="button" id="mn" aria-label="Menos">−</button><input id="g" inputmode="numeric" value="8"><button type="button" id="pl" aria-label="Más">+</button></div></div>
+        <div class="f"><span class="lb">¿Lo llevamos o pasáis?</span><div class="seg" id="seg"><button type="button" data-m="Entrega en vuestra oficina" class="on">Lo llevamos</button><button type="button" data-m="Recogida en Santagloria (Gran Via 272)">Lo recogemos</button></div></div>
+        <div class="f" id="xBox"><label for="x">Dónde lo llevamos</label><input id="x" autocomplete="street-address" placeholder="Calle, número y planta"></div>
+        <div class="f"><label for="z">Alergias o algo más <i>(opcional)</i></label><textarea id="z" placeholder="Sin gluten, vegano, hora exacta de la reunión…"></textarea></div>
+        <div class="err" id="err"></div>
+        <button class="go" id="go" type="submit">Enviar pedido</button>
+        <p class="note">Al enviarlo te damos el botón para confirmarlo por WhatsApp con Xavi. El catering se paga por adelantado al reservar; Xavi te explica cómo.</p>
+      </form>
+    </aside>
+  </div>
 </div>
 <div class="done" id="done">
   <div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
@@ -119,9 +177,9 @@
   <a class="wa" id="wa" href="#" target="_blank" rel="noopener"><span style="font-size:22px">💬</span> Abrir WhatsApp con Xavi</a>
   <p class="note">Si no se abre, escríbele al 646 825 202.</p>
 </div>
-<div class="bar" id="bar"><div><b id="barT"></b><button type="button" id="barGo">Continuar</button></div></div>
 <footer>Santagloria Coffee &amp; Bakery · Gran Via de les Corts Catalanes, 272 (Sants-Montjuïc)</footer>
-</main>
+</div>
+<div class="bar" id="bar"><div><b id="barT"></b><button type="button" id="barGo">Continuar</button></div></div>
 <script>
 const SCRIPT = "https://script.google.com/macros/s/AKfycbyqPQXWVfQGe0Kj3juiRFQRmHte_CDDWLREiBmKyhgcuLFIaL4s43OTSH3rgy_8lrajMw/exec", WA = '34646825202';
 const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
@@ -165,34 +223,38 @@ const CARTA = [
   { n: 'Para 20 personas', o: [['Pack dulce', 119, '28 Glòries dolces · 20 Santes · 24 mininapolitanas · 25 minigofres · 24 holes · 1 banda de fruta'], ['Pack salado', 195, '28 Glòries salades · 24 sandvitxos · 8 flautins · 24 mallas mixtas · 12 focaccias · 24 minibrioix'], ['Pack mixto', 172.7, '28 Glòries dolces · 25 minigofres · 24 sandvitxos · 16 flautins · 14 minientrepans · 12 mininapolitanas'], ['Pack premium', 205.8, '15 Glòries dolces · 14 minientrepans · 24 minibrioix · 24 sandvitxos · 25 minigofres · 12 mininapolitanas · 2 bandas de fruta']] }
  ] }
 ];
-const eur = n => n.toFixed(2).replace('.', ',') + ' €', qty = {}, esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); let mode = $('seg').querySelector('.on').dataset.m;
-const lines = () => { const r = []; CARTA.forEach(s => s.g.forEach(g => g.o.forEach(o => { const k = g.n + '|' + o[0]; if (qty[k]) r.push({ t: qty[k] + '× ' + g.n + ' · ' + o[0], v: qty[k] * o[1] }); }))); return r; };
+const eur = n => n.toFixed(2).replace('.', ',') + ' €', qty = {}, reg = {}, esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); let mode = $('seg').querySelector('.on').dataset.m;
+const mobile = () => matchMedia('(max-width:959px)').matches;
+const lines = () => { const r = []; CARTA.forEach(s => s.g.forEach(g => g.o.forEach(o => { const k = g.n + '|' + o[0]; if (qty[k]) r.push({ k, t: qty[k] + '× ' + g.n + ' · ' + o[0], v: qty[k] * o[1] }); }))); return r; };
 function paint() {
   const l = lines(), tot = l.reduce((a, x) => a + x.v, 0);
-  $('tot').textContent = l.length ? 'Total aprox. ' + eur(tot) : 'Todavía no has elegido nada';
+  $('lines').innerHTML = l.length ? l.map(x => '<li><span>' + esc(x.t) + '</span><b>' + eur(x.v) + '</b><button type="button" data-k="' + esc(x.k) + '" aria-label="Quitar">×</button></li>').join('') : '<li class="empty">Elige productos de la carta con el botón +</li>';
+  $('lines').querySelectorAll('button').forEach(b => b.onclick = () => reg[b.dataset.k](0));
+  $('tot').textContent = eur(tot); $('totBox').style.display = l.length ? 'flex' : 'none';
   $('barT').textContent = l.length ? l.length + (l.length > 1 ? ' productos' : ' producto') + ' · ' + eur(tot) : ''; $('bar').classList.toggle('show', !!l.length);
   CARTA.forEach((s, i) => { const n = s.g.reduce((a, g) => a + g.o.filter(o => qty[g.n + '|' + o[0]]).length, 0), b = $('s' + i).querySelector('.cnt'); b.textContent = n + (n > 1 ? ' elegidos' : ' elegido'); b.style.display = n ? 'inline-block' : 'none'; });
 }
 CARTA.forEach((s, i) => {
-  const sec = document.createElement('div'); sec.className = 'sec'; sec.id = 's' + i;
+  const sec = document.createElement('section'); sec.className = 'sec'; sec.id = 's' + i;
   sec.innerHTML = '<button type="button" class="sh" style="background-image:url(img/' + s.img + '.webp)" aria-expanded="false"><span class="ti">' + esc(s.n) + '</span><span class="cnt" style="display:none"></span><i class="ch"></i></button><div class="bd"></div>';
   const bd = sec.querySelector('.bd');
   s.g.forEach(g => {
     const c = document.createElement('div'); c.className = 'card';
-    c.innerHTML = (g.img ? '<div class="ph"><img loading="lazy" alt="' + esc(g.n) + '" src="img/' + g.img + '.webp"></div>' : '') + '<h3>' + esc(g.n) + '</h3>' + (g.sub ? '<p class="sub">' + esc(g.sub) + '</p>' : '') + (g.tags ? '<div class="tg">' + g.tags.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' : '') + (g.note ? '<p class="nt">' + esc(g.note) + '</p>' : '');
+    c.innerHTML = (g.img ? '<div class="ph"><img loading="lazy" decoding="async" alt="' + esc(g.n) + '" src="img/' + g.img + '.webp"></div>' : '') + '<h3>' + esc(g.n) + '</h3>' + (g.sub ? '<p class="sub">' + esc(g.sub) + '</p>' : '') + (g.tags ? '<div class="tg">' + g.tags.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' : '') + (g.note ? '<p class="nt">' + esc(g.note) + '</p>' : '');
     g.o.forEach(o => {
       const k = g.n + '|' + o[0], r = document.createElement('div'); r.className = 'it';
       r.innerHTML = '<span>' + esc(o[0]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</span><em>' + eur(o[1]) + '</em><div class="q"><button type="button" aria-label="Menos">−</button><i>0</i><button type="button" aria-label="Más">+</button></div>';
       const [m, p] = r.querySelectorAll('button'), n = r.querySelector('i'), set = v => { qty[k] = Math.max(0, Math.min(99, v)); n.textContent = qty[k]; r.classList.toggle('on', qty[k] > 0); paint(); };
-      m.onclick = () => set((qty[k] || 0) - 1); p.onclick = () => set((qty[k] || 0) + 1); c.appendChild(r);
+      reg[k] = set; m.onclick = () => set((qty[k] || 0) - 1); p.onclick = () => set((qty[k] || 0) + 1); c.appendChild(r);
     });
     bd.appendChild(c);
   });
-  sec.querySelector('.sh').onclick = e => { const o = sec.classList.toggle('open'); e.currentTarget.setAttribute('aria-expanded', o); if (o) setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
+  sec.querySelector('.sh').onclick = e => { if (!mobile()) return; const o = sec.classList.toggle('open'); e.currentTarget.setAttribute('aria-expanded', o); if (o) setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
   $('carta').appendChild(sec);
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = s.n; b.onclick = () => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); $('cats').appendChild(b);
 });
 $('s0').classList.add('open'); paint();
-$('barGo').onclick = () => $('n').scrollIntoView({ behavior: 'smooth', block: 'center' });
+$('barGo').onclick = () => $('side').scrollIntoView({ behavior: 'smooth', block: 'start' });
 if (q.get('e')) { $('e').value = q.get('e'); $('pill').textContent = '🥐 Pedido para ' + q.get('e'); }
 for (let m = 7 * 60 + 30; m <= 19 * 60; m += 30) { const o = document.createElement('option'), t = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); o.value = o.textContent = t; if (t === '09:00') o.selected = true; $('h').appendChild(o); }
 const day = n => { const d = new Date(Date.now() + n * 864e5); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
