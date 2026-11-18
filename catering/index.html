@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0}
-  body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:#FAF8F5;color:#1D1D1B;padding:26px 18px 60px;-webkit-text-size-adjust:100%}
+  body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:#FAF8F5;color:#1D1D1B;padding:26px 18px 96px;-webkit-text-size-adjust:100%}
   main{max-width:460px;margin:0 auto}
   .logo svg{height:30px;width:auto;display:block;margin:4px 0 22px}
   .pill{display:inline-block;background:#FDEBD0;color:#9A5B04;font-size:13px;font-weight:700;padding:6px 13px;border-radius:999px;margin-bottom:14px}
@@ -15,7 +15,7 @@
   .lead{font-size:16.5px;line-height:1.5;color:#4A4A46;margin-bottom:22px}
   form{display:flex;flex-direction:column;gap:18px}
   .f label,.f .lb{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#737370;margin-bottom:7px}
-  .f label i{font-style:normal;font-weight:500;text-transform:none;letter-spacing:0}
+  .f label i,.f .lb i{font-style:normal;font-weight:500;text-transform:none;letter-spacing:0}
   input,select,textarea{width:100%;font:500 17px Jost,system-ui,sans-serif;color:#1D1D1B;background:#fff;border:1px solid #E3DCCF;border-radius:14px;padding:13px 14px;outline:0;appearance:none;-webkit-appearance:none}
   textarea{resize:vertical;min-height:84px;line-height:1.4}
   input:focus,select:focus,textarea:focus{border-color:#E39A1E;box-shadow:0 0 0 3px rgba(227,154,30,.18)}
@@ -26,21 +26,37 @@
   .step{display:flex;align-items:center;background:#fff;border:1px solid #E3DCCF;border-radius:14px;overflow:hidden}
   .step button{border:0;background:none;width:54px;height:50px;font:600 24px Jost,sans-serif;color:#1C3152;cursor:pointer}
   .step input{border:0;text-align:center;border-radius:0;padding:12px 0;font-weight:700;font-size:20px;box-shadow:none!important}
-  details{background:#fff;border:1px solid #E3DCCF;border-radius:14px;margin-bottom:10px;overflow:hidden}
-  summary{list-style:none;cursor:pointer;padding:15px 16px;font:800 18px Fraunces,Georgia,serif;color:#1C3152;display:flex;justify-content:space-between;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:'+';font:600 22px Jost,sans-serif;color:#E39A1E}
-  details[open] summary::after{content:'–'}
-  summary b{font:700 12px Jost,sans-serif;background:#1C3152;color:#fff;border-radius:999px;padding:3px 9px;margin-left:8px}
-  .g{padding:2px 16px 12px;border-top:1px solid #F0EBE1}
-  .g h4{font:700 13px Jost,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#737370;margin:14px 0 4px}
-  .it{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:16px}
-  .it span{flex:1}.it em{font-style:normal;color:#737370;font-size:15px;min-width:62px;text-align:right}
-  .q{display:flex;align-items:center;border:1px solid #E3DCCF;border-radius:999px;overflow:hidden}
+  .hero{display:block;width:100%;height:178px;object-fit:cover;border-radius:22px;margin:0 0 18px}
+  .sec{background:#fff;border:1px solid #E3DCCF;border-radius:22px;overflow:hidden;margin-bottom:12px}
+  .sh{position:relative;display:flex;align-items:flex-end;justify-content:space-between;width:100%;height:118px;border:0;padding:16px 18px;cursor:pointer;background:#1C3152 center/cover no-repeat;text-align:left;color:#fff}
+  .sh::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,36,62,.82) 0%,rgba(20,36,62,.15) 70%)}
+  .sh>*{position:relative}
+  .ti{font:800 26px/1.05 Fraunces,Georgia,serif}
+  .cnt{position:absolute!important;top:12px;right:14px;background:#E39A1E;color:#1D1D1B;font:700 12px Jost,sans-serif;border-radius:999px;padding:4px 10px}
+  .ch{width:11px;height:11px;border-right:3px solid #fff;border-bottom:3px solid #fff;transform:rotate(45deg);margin:0 4px 8px 12px;transition:transform .2s}
+  .sec.open .ch{transform:rotate(-135deg);margin-bottom:2px}
+  .bd{display:none}.sec.open .bd{display:block}
+  .card{padding:16px 16px 10px;border-top:1px solid #F0EBE1}
+  .ph{background:#F6EFE1;border-radius:16px;height:176px;display:flex;align-items:center;justify-content:center;margin-bottom:13px}
+  .ph img{max-height:150px;max-width:78%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(60,40,10,.18))}
+  .card h3{font:800 21px/1.12 Fraunces,Georgia,serif;color:#1C3152}
+  .sub{font-size:15.5px;color:#6B665C;margin-top:3px}
+  .tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .tg span{background:#F3EEE4;color:#4A4A46;font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:999px}
+  .nt{font-size:12.5px;color:#8A8578;margin:9px 0 2px}
+  .it{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:16px;border-top:1px solid #F5F0E7}
+  .card h3+.it,.card .nt+.it{margin-top:4px}
+  .it span{flex:1;line-height:1.25}.it small{display:block;font-size:12.5px;color:#8A8578;margin-top:2px}
+  .it em{font-style:normal;font-weight:600;color:#1C3152;font-size:15px;white-space:nowrap}
+  .q{display:flex;align-items:center;border:1px solid #E3DCCF;border-radius:999px;overflow:hidden;flex:none}
   .q button{border:0;background:none;width:36px;height:36px;font:600 20px Jost,sans-serif;color:#1C3152;cursor:pointer}
   .q i{font-style:normal;font-weight:700;min-width:22px;text-align:center}
   .it.on .q{background:#1C3152;border-color:#1C3152}.it.on .q button,.it.on .q i{color:#fff}
   .tot{margin-top:6px;font-size:15px;font-weight:600;color:#1C3152;text-align:right}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(250,248,245,.94);backdrop-filter:blur(8px);border-top:1px solid #E3DCCF}
+  .bar.show{display:block}.bar div{max-width:460px;margin:0 auto;display:flex;align-items:center;gap:12px}
+  .bar b{flex:1;font:700 16px Jost,sans-serif;color:#1C3152}
+  .bar button{border:0;background:#1D1D1B;color:#fff;font:700 15px Jost,sans-serif;padding:13px 20px;border-radius:14px;cursor:pointer}
   .go{border:0;background:#1D1D1B;color:#fff;font:700 17px Jost,sans-serif;padding:17px;border-radius:16px;cursor:pointer;margin-top:4px}
   .go:disabled{opacity:.55}
   .note{font-size:13px;color:#737370;line-height:1.5;text-align:center;margin-top:2px}
@@ -72,6 +88,7 @@
 </svg></div>
 <div id="form">
   <div class="pill" id="pill">🥐 Catering para empresas</div>
+  <img class="hero" src="img/b-portada.webp" alt="Catering Santagloria">
   <h1>Pedid vuestro catering en <em>un minuto</em></h1>
   <p class="lead">Desayunos de equipo y reuniones con la carta de Santagloria. Elige lo que queráis y Xavi os confirma el total por WhatsApp. Sin compromiso.</p>
   <form id="f" novalidate>
@@ -90,40 +107,92 @@
     <div class="f"><label for="z">Alergias o algo más <i>(opcional)</i></label><textarea id="z" placeholder="Sin gluten, vegano, hora exacta de la reunión…"></textarea></div>
     <div class="err" id="err"></div>
     <button class="go" id="go" type="submit">Enviar pedido</button>
-    <p class="note">Al enviarlo te damos el botón para confirmarlo por WhatsApp con Xavi.</p>
+    <p class="note">Al enviarlo te damos el botón para confirmarlo por WhatsApp con Xavi. El catering se paga por adelantado al reservar; Xavi te explica cómo.</p>
   </form>
 </div>
 <div class="done" id="done">
   <div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
   <h1 id="dh">Pedido recibido</h1>
-  <p class="lead" id="dp">Te pasamos el precio y confirmamos por WhatsApp.</p>
+  <p class="lead" id="dp">Confirmamos el total por WhatsApp.</p>
   <div class="sum" id="sum"></div>
   <p class="ref" id="ref"></p>
   <a class="wa" id="wa" href="#" target="_blank" rel="noopener"><span style="font-size:22px">💬</span> Abrir WhatsApp con Xavi</a>
   <p class="note">Si no se abre, escríbele al 646 825 202.</p>
 </div>
+<div class="bar" id="bar"><div><b id="barT"></b><button type="button" id="barGo">Continuar</button></div></div>
 <footer>Santagloria Coffee &amp; Bakery · Gran Via de les Corts Catalanes, 272 (Sants-Montjuïc)</footer>
 </main>
 <script>
 const SCRIPT = "https://script.google.com/macros/s/AKfycbyqPQXWVfQGe0Kj3juiRFQRmHte_CDDWLREiBmKyhgcuLFIaL4s43OTSH3rgy_8lrajMw/exec", WA = '34646825202';
 const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
-// Carta de catering (precios del PDF SG_Catering_preus). [sección, [[producto, [[opción, precio]…]]…]]
-const u = a => a.map(n => [n[0] + ' uds', n[1]]);
+// Carta de catering: precios del PDF SG_Catering_preus y fotos/variedades del catálogo. Cada opción: [texto, precio, detalle]
 const CARTA = [
- ['Dulce', [['Glòries dolces', u([[8, 6.9], [15, 12.8], [28, 23.9]])], ['Santes', u([[10, 8.5], [20, 16.9], [40, 33.9]])], ['Assortiment mixt dulce', u([[15, 11.9], [28, 21]])], ['Assortiment mixt dulce y salado', u([[15, 15.9], [28, 29.4]])], ['Minigofres', u([[9, 12.6], [12, 16.8], [25, 35]])], ['Holes', u([[12, 11.9], [24, 19.9]])], ['Bandes de fruita', [['1 caja', 8.9], ['2 cajas', 17.8], ['4 cajas', 35.6]]], ['Mininapolitanes de chocolate', u([[12, 7.2], [24, 14.4]])], ['Caja dip de Glòries dolces', u([[8, 9.9], [15, 15.9], [28, 27.9]])], ['Caja dip de Santes', u([[8, 8.9], [20, 19.9], [40, 38.9]])], ['Caja dip de Glòries y Santes', u([[16, 15.9], [28, 26.9]])], ['Minibrioix', u([[8, 19.2], [12, 28.8], [24, 57.6]])], ['Crestes', u([[9, 28.35], [16, 52.8]])]]],
- ['Salado', [['Glòries salades', u([[8, 10.4], [15, 19.5], [28, 31.2]])], ['Focàccies', u([[6, 9.3], [12, 18.6], [24, 37.2]])], ['Flautins', u([[4, 7.9], [8, 15.6], [16, 31.2]])], ['Sandvitxos', [['8 porciones', 14.4], ['12 porciones', 21.4], ['24 porciones', 43.2]]], ['Minientrepà de tortilla', u([[12, 26.4], [20, 44]])], ['Minientrepà ibérico', u([[16, 38.4], [30, 72]])], ['Minientrepà caja variada', u([[14, 32.2], [24, 55.2]])], ['Minimalla de jamón y queso', u([[24, 28.8], [42, 50.4]])]]],
- ['Bebidas y extras', [['Café (1 L)', [['1 L', 12.4]]], ['Leche (1 L)', [['Entera', 4.99], ['Semidesnatada', 4.99], ['Sin lactosa', 4.99]]], ['Bebida vegetal (1 L)', [['Avena', 5.99], ['Soja', 5.99], ['Almendra', 5.99]]], ['Zumo de naranja natural (1 L)', [['1 L', 11.5]]], ['Más bebidas', [['Agua', 1.85], ['Refrescos', 2.85]]], ['Complementos salados', [['Grissini', 1.95], ['Bolsa de patatas', 2], ['Empanada de atún', 17.5], ['Tortilla de patatas', 13.9]]], ['Complementos dulces', [['Minimagdalenas con trocitos de cacao', 4.9], ['Bizcocho Carrot Cake sin gluten', 5.4], ['Bizcocho con trocitos de cacao sin gluten', 4.9]]]]],
- ['Para compartir', [['Para 10 personas', [['Pack dulce', 57.2], ['Pack salado', 103.2], ['Pack mixto', 98.8], ['Pack premium', 102.4]]], ['Para 15 personas', [['Pack dulce', 83.9], ['Pack salado', 141.3], ['Pack mixto', 154.4], ['Pack premium', 166.2]]], ['Para 20 personas', [['Pack dulce', 119], ['Pack salado', 195], ['Pack mixto', 172.7], ['Pack premium', 205.8]]]]]
+ { n: 'Dulce', img: 'b-dolcos', g: [
+  { n: 'Glòries dolces', img: 'gloria-dolce', sub: 'Bañadas en almíbar con mucho amor', tags: ['Clásicas', 'Chocolate negro', 'Chocolate blanco', 'Lotus y chocolate negro', 'Oreo', 'Pistachos', 'Nocilla', 'Filipinos y chocolate blanco'], note: 'Combina las variedades que quieras', o: [['Caja de 8', 6.9], ['Caja de 15', 12.8], ['Caja de 28', 23.9]] },
+  { n: 'Santes', img: 'santes', sub: '¡Divinas!', tags: ['Clásicas', 'Chocolate negro', 'Chocolate blanco'], note: 'Combina las variedades que quieras', o: [['Caja de 10', 8.5], ['Caja de 20', 16.9], ['Caja de 40', 33.9]] },
+  { n: 'Assortiment mixt dulce', img: 'mixt-dolc', sub: 'Sí, son minis… ¡y maxiperfectas!', note: 'Combina las variedades que quieras', o: [['Caja de 15', 11.9, '8 Glòries dolces + 7 Santes'], ['Caja de 28', 21, '14 Glòries dolces + 14 Santes']] },
+  { n: 'Assortiment mixt dulce y salado', img: 'mixt-dolc-salat', sub: 'Nuestra seña de identidad', note: 'Combina las variedades que quieras', o: [['Caja de 15', 15.9, '8 Glòries dolces + 7 Glòries salades'], ['Caja de 28', 29.4, '14 Glòries dolces + 14 Glòries salades']] },
+  { n: 'Minigofres', img: 'minigofres', sub: 'Tu pequeño placer', tags: ['Clásicos', 'Chocolate y Lotus', 'Chocolate blanco y Oreo'], note: 'Combina las variedades que quieras', o: [['Caja de 9', 12.6], ['Caja de 12', 16.8], ['Caja de 25', 35]] },
+  { n: 'Holes', img: 'holes', sub: 'Tan redondos como tiernos', tags: ['Clásicos', 'Chocolate negro', 'Chocolate blanco'], note: 'Combina las variedades que quieras', o: [['Caja de 12', 11.9], ['Caja de 24', 19.9]] },
+  { n: 'Bandes de fruita', img: 'bandes', sub: 'Las de siempre', o: [['1 banda', 8.9], ['2 bandas', 17.8], ['4 bandas', 35.6]] },
+  { n: 'Mininapolitanes de chocolate', img: 'mininapolitanes', sub: '¡Rellenas de placer!', o: [['Caja de 12', 7.2], ['Caja de 24', 14.4]] },
+  { n: 'Caja dip', img: 'dip-gran', sub: 'La caja perfecta para compartir en tus eventos', tags: ['Salsas: Nocilla clásica, Nocilla de avellanas, almíbar de leche', 'Toppings: pistachos, Filipinos, Oreo, Lotus'], note: 'Glòries y Santes clásicas', o: [['Glòries · 8 uds', 9.9, '1 salsa + 2 toppings'], ['Glòries · 15 uds', 15.9, '2 salsas + 1 topping'], ['Glòries · 28 uds', 27.9, '4 salsas + 2 toppings'], ['Santes · 8 uds', 8.9, '1 salsa + 2 toppings'], ['Santes · 20 uds', 19.9, '2 salsas + 1 topping'], ['Santes · 40 uds', 38.9, '4 salsas + 2 toppings'], ['Mixta · 16 uds', 15.9, '8 Glòries + 8 Santes · 2 salsas + 1 topping'], ['Mixta · 28 uds', 26.9, '14 Glòries + 14 Santes · 4 salsas + 2 toppings']] }
+ ] },
+ { n: 'Salado', img: 'b-salats', g: [
+  { n: 'Glòries salades', img: 'gloria-salada', sub: '¡La sal de la vida!', tags: ['Aguacate y pavo', 'Ibérica con tomate'], note: 'Combina las variedades que quieras', o: [['Caja de 8', 10.4], ['Caja de 15', 19.5], ['Caja de 28', 31.2]] },
+  { n: 'Sandvitxos', img: 'sandvitxos', sub: 'Los de siempre, hechos a nuestro estilo', tags: ['Santagloria Club', 'Salmón Club', 'Brioche trufado'], note: 'Combina dos variedades (8) o todas (12 y 24)', o: [['Caja de 8 porciones', 14.4], ['Caja de 12 porciones', 21.4], ['Caja de 24 porciones', 43.2]] },
+  { n: 'Focàccies', img: 'focaccies', tags: ['Feta, cebolla caramelizada y pistachos', 'Beicon, brie y trufa'], note: 'Combina las variedades que quieras', o: [['Caja de 6', 9.3], ['Caja de 12', 18.6], ['Caja de 24', 37.2]] },
+  { n: 'Flautins', img: 'flautins', sub: '¿A que suena bien?', tags: ['Mixto', 'Queso', 'Atún', 'Ibérico'], note: 'Caja de 4: una variedad · de 8: dos · de 16: todas', o: [['Caja de 4', 7.9], ['Caja de 8', 15.6], ['Caja de 16', 31.2]] },
+  { n: 'Minientrepans', img: 'minientrepans', sub: 'Un sabor enorme', o: [['Tortilla · 12 uds', 26.4], ['Tortilla · 20 uds', 44], ['Ibérico · 16 uds', 38.4], ['Ibérico · 30 uds', 72], ['Variada · 14 uds', 32.2, '8 ibéricos + 6 tortilla'], ['Variada · 24 uds', 55.2, '12 ibéricos + 12 tortilla']] },
+  { n: 'Minibrioix', img: 'minibrioix', sub: '¡Buenííísimos!', tags: ['Pavo y feta', 'Pollo y pesto', 'Tortilla y trufa'], note: 'Combina las variedades que quieras', o: [['Caja de 8', 19.2], ['Caja de 12', 28.8], ['Caja de 24', 57.6]] },
+  { n: 'Crestes', img: 'crestes', sub: '¡Has hecho bien en pedirlas!', tags: ['Pollo al curry', 'Ternera'], note: 'Combina las variedades que quieras', o: [['Caja de 9', 28.35], ['Caja de 16', 52.8]] },
+  { n: 'Minimalla de jamón y queso', img: 'minimalla', sub: 'El sabor que nunca falla', o: [['Caja de 24', 28.8], ['Caja de 42', 50.4]] }
+ ] },
+ { n: 'Bebidas y extras', img: 'b-begudes', g: [
+  { n: 'Café', o: [['Termo de café (1 L)', 12.4]] },
+  { n: 'Leche', o: [['Termo de leche entera (1 L)', 4.99], ['Termo de leche semidesnatada (1 L)', 4.99], ['Termo de leche sin lactosa (1 L)', 4.99]] },
+  { n: 'Bebida vegetal', o: [['Termo de bebida de avena (1 L)', 5.99], ['Termo de bebida de soja (1 L)', 5.99], ['Termo de bebida de almendra (1 L)', 5.99]] },
+  { n: 'Zumo de naranja natural', o: [['Zumo de naranja natural (1 L)', 11.5]] },
+  { n: 'Más bebidas', o: [['Agua', 1.85], ['Refrescos', 2.85]] },
+  { n: 'Empanada de atún', img: 'empanada', o: [['Empanada entera', 17.5]] },
+  { n: 'Tortilla de patatas', img: 'truita', o: [['Tortilla entera', 13.9]] },
+  { n: 'Complementos salados', o: [['Grissini', 1.95], ['Bolsa de patatas', 2]] },
+  { n: 'Complementos dulces', o: [['Minimagdalenas con trocitos de cacao', 4.9], ['Bizcocho Carrot Cake · sin gluten', 5.4], ['Bizcocho con trocitos de cacao · sin gluten', 4.9]] }
+ ] },
+ { n: 'Para compartir', img: 'b-compartir', g: [
+  { n: 'Para 10 personas', o: [['Pack dulce', 57.2, '15 Glòries dolces · 10 Santes · 12 mininapolitanas · 12 minigofres · 12 holes'], ['Pack salado', 103.2, '15 Glòries salades · 24 sandvitxos · 16 flautins · 6 focaccias'], ['Pack mixto', 98.8, '15 Glòries dolces · 12 minigofres · 12 sandvitxos · 8 flautins · 14 minientrepans'], ['Pack premium', 102.4, '15 Glòries dolces · 14 minientrepans · 8 minibrioix · 12 sandvitxos · 12 minigofres']] },
+  { n: 'Para 15 personas', o: [['Pack dulce', 83.9, '28 Glòries dolces · 20 Santes · 24 mininapolitanas · 12 minigofres · 12 holes'], ['Pack salado', 141.3, '15 Glòries salades · 24 sandvitxos · 16 flautins · 24 mallas mixtas · 12 focaccias'], ['Pack mixto', 154.4, '15 Glòries dolces · 25 minigofres · 24 sandvitxos · 16 flautins · 14 minientrepans'], ['Pack premium', 166.2, '15 Glòries dolces · 14 minientrepans · 24 minibrioix · 12 sandvitxos · 25 minigofres · 12 mininapolitanas']] },
+  { n: 'Para 20 personas', o: [['Pack dulce', 119, '28 Glòries dolces · 20 Santes · 24 mininapolitanas · 25 minigofres · 24 holes · 1 banda de fruta'], ['Pack salado', 195, '28 Glòries salades · 24 sandvitxos · 8 flautins · 24 mallas mixtas · 12 focaccias · 24 minibrioix'], ['Pack mixto', 172.7, '28 Glòries dolces · 25 minigofres · 24 sandvitxos · 16 flautins · 14 minientrepans · 12 mininapolitanas'], ['Pack premium', 205.8, '15 Glòries dolces · 14 minientrepans · 24 minibrioix · 24 sandvitxos · 25 minigofres · 12 mininapolitanas · 2 bandas de fruta']] }
+ ] }
 ];
-const eur = n => n.toFixed(2).replace('.', ',') + ' €', qty = {}; let mode = $('seg').querySelector('.on').dataset.m;
-const lines = () => { const r = []; CARTA.forEach(s => s[1].forEach(g => g[1].forEach(o => { const k = g[0] + '|' + o[0]; if (qty[k]) r.push({ t: qty[k] + '× ' + g[0] + ' · ' + o[0], v: qty[k] * o[1] }); }))); return r; };
-function paint() { const l = lines(), tot = l.reduce((a, x) => a + x.v, 0); $('tot').textContent = l.length ? l.length + (l.length > 1 ? ' productos' : ' producto') + ' · Total aprox. ' + eur(tot) : 'Todavía no has elegido nada'; CARTA.forEach((s, i) => { const n = s[1].reduce((a, g) => a + g[1].filter(o => qty[g[0] + '|' + o[0]]).length, 0), b = $('c' + i).querySelector('b'); if (b) b.remove(); if (n) $('c' + i).querySelector('summary').insertAdjacentHTML('beforeend', '<b>' + n + '</b>'); }); }
+const eur = n => n.toFixed(2).replace('.', ',') + ' €', qty = {}, esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); let mode = $('seg').querySelector('.on').dataset.m;
+const lines = () => { const r = []; CARTA.forEach(s => s.g.forEach(g => g.o.forEach(o => { const k = g.n + '|' + o[0]; if (qty[k]) r.push({ t: qty[k] + '× ' + g.n + ' · ' + o[0], v: qty[k] * o[1] }); }))); return r; };
+function paint() {
+  const l = lines(), tot = l.reduce((a, x) => a + x.v, 0);
+  $('tot').textContent = l.length ? 'Total aprox. ' + eur(tot) : 'Todavía no has elegido nada';
+  $('barT').textContent = l.length ? l.length + (l.length > 1 ? ' productos' : ' producto') + ' · ' + eur(tot) : ''; $('bar').classList.toggle('show', !!l.length);
+  CARTA.forEach((s, i) => { const n = s.g.reduce((a, g) => a + g.o.filter(o => qty[g.n + '|' + o[0]]).length, 0), b = $('s' + i).querySelector('.cnt'); b.textContent = n + (n > 1 ? ' elegidos' : ' elegido'); b.style.display = n ? 'inline-block' : 'none'; });
+}
 CARTA.forEach((s, i) => {
-  const d = document.createElement('details'); d.id = 'c' + i; d.innerHTML = '<summary><span>' + s[0] + '</span></summary>'; const w = document.createElement('div'); w.className = 'g';
-  s[1].forEach(g => { w.insertAdjacentHTML('beforeend', '<h4>' + g[0] + '</h4>'); g[1].forEach(o => { const k = g[0] + '|' + o[0], r = document.createElement('div'); r.className = 'it'; r.innerHTML = '<span>' + o[0] + '</span><em>' + eur(o[1]) + '</em><div class="q"><button type="button" aria-label="Menos">−</button><i>0</i><button type="button" aria-label="Más">+</button></div>'; const [m, p] = r.querySelectorAll('button'), n = r.querySelector('i'); const set = v => { qty[k] = Math.max(0, Math.min(99, v)); n.textContent = qty[k]; r.classList.toggle('on', qty[k] > 0); paint(); }; m.onclick = () => set((qty[k] || 0) - 1); p.onclick = () => set((qty[k] || 0) + 1); w.appendChild(r); }); });
-  d.appendChild(w); $('carta').appendChild(d);
+  const sec = document.createElement('div'); sec.className = 'sec'; sec.id = 's' + i;
+  sec.innerHTML = '<button type="button" class="sh" style="background-image:url(img/' + s.img + '.webp)" aria-expanded="false"><span class="ti">' + esc(s.n) + '</span><span class="cnt" style="display:none"></span><i class="ch"></i></button><div class="bd"></div>';
+  const bd = sec.querySelector('.bd');
+  s.g.forEach(g => {
+    const c = document.createElement('div'); c.className = 'card';
+    c.innerHTML = (g.img ? '<div class="ph"><img loading="lazy" alt="' + esc(g.n) + '" src="img/' + g.img + '.webp"></div>' : '') + '<h3>' + esc(g.n) + '</h3>' + (g.sub ? '<p class="sub">' + esc(g.sub) + '</p>' : '') + (g.tags ? '<div class="tg">' + g.tags.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' : '') + (g.note ? '<p class="nt">' + esc(g.note) + '</p>' : '');
+    g.o.forEach(o => {
+      const k = g.n + '|' + o[0], r = document.createElement('div'); r.className = 'it';
+      r.innerHTML = '<span>' + esc(o[0]) + (o[2] ? '<small>' + esc(o[2]) + '</small>' : '') + '</span><em>' + eur(o[1]) + '</em><div class="q"><button type="button" aria-label="Menos">−</button><i>0</i><button type="button" aria-label="Más">+</button></div>';
+      const [m, p] = r.querySelectorAll('button'), n = r.querySelector('i'), set = v => { qty[k] = Math.max(0, Math.min(99, v)); n.textContent = qty[k]; r.classList.toggle('on', qty[k] > 0); paint(); };
+      m.onclick = () => set((qty[k] || 0) - 1); p.onclick = () => set((qty[k] || 0) + 1); c.appendChild(r);
+    });
+    bd.appendChild(c);
+  });
+  sec.querySelector('.sh').onclick = e => { const o = sec.classList.toggle('open'); e.currentTarget.setAttribute('aria-expanded', o); if (o) setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
+  $('carta').appendChild(sec);
 });
-$('c0').open = true;
+$('s0').classList.add('open'); paint();
+$('barGo').onclick = () => $('n').scrollIntoView({ behavior: 'smooth', block: 'center' });
 if (q.get('e')) { $('e').value = q.get('e'); $('pill').textContent = '🥐 Pedido para ' + q.get('e'); }
 for (let m = 7 * 60 + 30; m <= 19 * 60; m += 30) { const o = document.createElement('option'), t = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); o.value = o.textContent = t; if (t === '09:00') o.selected = true; $('h').appendChild(o); }
 const day = n => { const d = new Date(Date.now() + n * 864e5); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
@@ -153,8 +222,8 @@ $('f').onsubmit = async ev => {
   const msg = 'Hola Xavi, soy ' + n + ' de ' + e + '. Quiero pedir catering para ' + g + ' personas el ' + when + '.\n' + pedido + '\n' + x + ($('z').value.trim() ? '\nNotas: ' + $('z').value.trim() : '') + (id ? '\n(Pedido ' + id + ')' : '');
   $('sum').textContent = when + '\n' + g + ' personas\n' + pedido + '\n' + x;
   $('ref').textContent = id ? 'Referencia ' + id : '';
-  $('dp').textContent = id ? 'Lo hemos apuntado. Para confirmarlo y pasarte el precio, escríbele ahora a Xavi por WhatsApp.' : 'Para confirmarlo y pasarte el precio, escríbele ahora a Xavi por WhatsApp.';
+  $('dp').textContent = id ? 'Lo hemos apuntado. Para confirmarlo y cerrar el total, escríbele ahora a Xavi por WhatsApp.' : 'Para confirmarlo y cerrar el total, escríbele ahora a Xavi por WhatsApp.';
   $('wa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
-  $('form').style.display = 'none'; $('done').style.display = 'block'; window.scrollTo(0, 0);
+  $('form').style.display = 'none'; $('bar').style.display = 'none'; $('done').style.display = 'block'; window.scrollTo(0, 0);
 };
 </script></body></html>
