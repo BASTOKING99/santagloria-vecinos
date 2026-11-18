@@ -26,9 +26,21 @@
   .step{display:flex;align-items:center;background:#fff;border:1px solid #E3DCCF;border-radius:14px;overflow:hidden}
   .step button{border:0;background:none;width:54px;height:50px;font:600 24px Jost,sans-serif;color:#1C3152;cursor:pointer}
   .step input{border:0;text-align:center;border-radius:0;padding:12px 0;font-weight:700;font-size:20px;box-shadow:none!important}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chips button{border:1px solid #E3DCCF;background:#fff;color:#1D1D1B;font:600 15px Jost,sans-serif;padding:10px 15px;border-radius:999px;cursor:pointer;transition:all .15s}
-  .chips button.on{background:#1C3152;border-color:#1C3152;color:#fff}
+  details{background:#fff;border:1px solid #E3DCCF;border-radius:14px;margin-bottom:10px;overflow:hidden}
+  summary{list-style:none;cursor:pointer;padding:15px 16px;font:800 18px Fraunces,Georgia,serif;color:#1C3152;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:'+';font:600 22px Jost,sans-serif;color:#E39A1E}
+  details[open] summary::after{content:'–'}
+  summary b{font:700 12px Jost,sans-serif;background:#1C3152;color:#fff;border-radius:999px;padding:3px 9px;margin-left:8px}
+  .g{padding:2px 16px 12px;border-top:1px solid #F0EBE1}
+  .g h4{font:700 13px Jost,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#737370;margin:14px 0 4px}
+  .it{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:16px}
+  .it span{flex:1}.it em{font-style:normal;color:#737370;font-size:15px;min-width:62px;text-align:right}
+  .q{display:flex;align-items:center;border:1px solid #E3DCCF;border-radius:999px;overflow:hidden}
+  .q button{border:0;background:none;width:36px;height:36px;font:600 20px Jost,sans-serif;color:#1C3152;cursor:pointer}
+  .q i{font-style:normal;font-weight:700;min-width:22px;text-align:center}
+  .it.on .q{background:#1C3152;border-color:#1C3152}.it.on .q button,.it.on .q i{color:#fff}
+  .tot{margin-top:6px;font-size:15px;font-weight:600;color:#1C3152;text-align:right}
   .go{border:0;background:#1D1D1B;color:#fff;font:700 17px Jost,sans-serif;padding:17px;border-radius:16px;cursor:pointer;margin-top:4px}
   .go:disabled{opacity:.55}
   .note{font-size:13px;color:#737370;line-height:1.5;text-align:center;margin-top:2px}
@@ -61,7 +73,7 @@
 <div id="form">
   <div class="pill" id="pill">🥐 Catering para empresas</div>
   <h1>Pedid vuestro catering en <em>un minuto</em></h1>
-  <p class="lead">Desayunos de equipo y reuniones con la carta de Santagloria. Cuéntanos qué necesitáis y te pasamos el precio por WhatsApp. Sin compromiso.</p>
+  <p class="lead">Desayunos de equipo y reuniones con la carta de Santagloria. Elige lo que queráis y Xavi os confirma el total por WhatsApp. Sin compromiso.</p>
   <form id="f" novalidate>
     <div class="f"><label for="n">Tu nombre</label><input id="n" autocomplete="name" placeholder="Nombre y apellido"></div>
     <div class="f"><label for="p">Tu móvil</label><input id="p" type="tel" inputmode="tel" autocomplete="tel" placeholder="6xx xxx xxx"></div>
@@ -72,7 +84,7 @@
     </div>
     <p class="note" style="margin:-8px 0 0;text-align:left">Con 24–48 h de antelación, de lunes a domingo.</p>
     <div class="f"><span class="lb">Personas</span><div class="step"><button type="button" id="mn" aria-label="Menos">−</button><input id="g" inputmode="numeric" value="8"><button type="button" id="pl" aria-label="Más">+</button></div></div>
-    <div class="f"><span class="lb">Qué os apetece <i>(elige lo que quieras)</i></span><div class="chips" id="chips"></div></div>
+    <div class="f"><span class="lb">La carta <i>(pulsa + en lo que queráis)</i></span><div id="carta"></div><div class="tot" id="tot">Todavía no has elegido nada</div></div>
     <div class="f"><span class="lb">¿Lo llevamos o pasáis?</span><div class="seg" id="seg"><button type="button" data-m="Entrega en vuestra oficina" class="on">Lo llevamos</button><button type="button" data-m="Recogida en Santagloria (Gran Via 272)">Pasamos a recogerlo</button></div></div>
     <div class="f" id="xBox"><label for="x">Dónde lo llevamos</label><input id="x" autocomplete="street-address" placeholder="Calle, número y planta"></div>
     <div class="f"><label for="z">Alergias o algo más <i>(opcional)</i></label><textarea id="z" placeholder="Sin gluten, vegano, hora exacta de la reunión…"></textarea></div>
@@ -95,10 +107,24 @@
 <script>
 const SCRIPT = "https://script.google.com/macros/s/AKfycbyqPQXWVfQGe0Kj3juiRFQRmHte_CDDWLREiBmKyhgcuLFIaL4s43OTSH3rgy_8lrajMw/exec", WA = '34646825202';
 const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
-const ITEMS = ['Desayuno de reunión (café y bollería)', 'Surtido de Glorias dulces', 'Surtido salado', 'Santas', 'Cajas Dip', 'Café y bebidas en termo', 'Otra cosa (lo cuento abajo)'];
-const sel = new Set(); let mode = $('seg').querySelector('.on').dataset.m;
+// Carta de catering (precios del PDF SG_Catering_preus). [sección, [[producto, [[opción, precio]…]]…]]
+const u = a => a.map(n => [n[0] + ' uds', n[1]]);
+const CARTA = [
+ ['Dulce', [['Glòries dolces', u([[8, 6.9], [15, 12.8], [28, 23.9]])], ['Santes', u([[10, 8.5], [20, 16.9], [40, 33.9]])], ['Assortiment mixt dulce', u([[15, 11.9], [28, 21]])], ['Assortiment mixt dulce y salado', u([[15, 15.9], [28, 29.4]])], ['Minigofres', u([[9, 12.6], [12, 16.8], [25, 35]])], ['Holes', u([[12, 11.9], [24, 19.9]])], ['Bandes de fruita', [['1 caja', 8.9], ['2 cajas', 17.8], ['4 cajas', 35.6]]], ['Mininapolitanes de chocolate', u([[12, 7.2], [24, 14.4]])], ['Caja dip de Glòries dolces', u([[8, 9.9], [15, 15.9], [28, 27.9]])], ['Caja dip de Santes', u([[8, 8.9], [20, 19.9], [40, 38.9]])], ['Caja dip de Glòries y Santes', u([[16, 15.9], [28, 26.9]])], ['Minibrioix', u([[8, 19.2], [12, 28.8], [24, 57.6]])], ['Crestes', u([[9, 28.35], [16, 52.8]])]]],
+ ['Salado', [['Glòries salades', u([[8, 10.4], [15, 19.5], [28, 31.2]])], ['Focàccies', u([[6, 9.3], [12, 18.6], [24, 37.2]])], ['Flautins', u([[4, 7.9], [8, 15.6], [16, 31.2]])], ['Sandvitxos', [['8 porciones', 14.4], ['12 porciones', 21.4], ['24 porciones', 43.2]]], ['Minientrepà de tortilla', u([[12, 26.4], [20, 44]])], ['Minientrepà ibérico', u([[16, 38.4], [30, 72]])], ['Minientrepà caja variada', u([[14, 32.2], [24, 55.2]])], ['Minimalla de jamón y queso', u([[24, 28.8], [42, 50.4]])]]],
+ ['Bebidas y extras', [['Café (1 L)', [['1 L', 12.4]]], ['Leche (1 L)', [['Entera', 4.99], ['Semidesnatada', 4.99], ['Sin lactosa', 4.99]]], ['Bebida vegetal (1 L)', [['Avena', 5.99], ['Soja', 5.99], ['Almendra', 5.99]]], ['Zumo de naranja natural (1 L)', [['1 L', 11.5]]], ['Más bebidas', [['Agua', 1.85], ['Refrescos', 2.85]]], ['Complementos salados', [['Grissini', 1.95], ['Bolsa de patatas', 2], ['Empanada de atún', 17.5], ['Tortilla de patatas', 13.9]]], ['Complementos dulces', [['Minimagdalenas con trocitos de cacao', 4.9], ['Bizcocho Carrot Cake sin gluten', 5.4], ['Bizcocho con trocitos de cacao sin gluten', 4.9]]]]],
+ ['Para compartir', [['Para 10 personas', [['Pack dulce', 57.2], ['Pack salado', 103.2], ['Pack mixto', 98.8], ['Pack premium', 102.4]]], ['Para 15 personas', [['Pack dulce', 83.9], ['Pack salado', 141.3], ['Pack mixto', 154.4], ['Pack premium', 166.2]]], ['Para 20 personas', [['Pack dulce', 119], ['Pack salado', 195], ['Pack mixto', 172.7], ['Pack premium', 205.8]]]]]
+];
+const eur = n => n.toFixed(2).replace('.', ',') + ' €', qty = {}; let mode = $('seg').querySelector('.on').dataset.m;
+const lines = () => { const r = []; CARTA.forEach(s => s[1].forEach(g => g[1].forEach(o => { const k = g[0] + '|' + o[0]; if (qty[k]) r.push({ t: qty[k] + '× ' + g[0] + ' · ' + o[0], v: qty[k] * o[1] }); }))); return r; };
+function paint() { const l = lines(), tot = l.reduce((a, x) => a + x.v, 0); $('tot').textContent = l.length ? l.length + (l.length > 1 ? ' productos' : ' producto') + ' · Total aprox. ' + eur(tot) : 'Todavía no has elegido nada'; CARTA.forEach((s, i) => { const n = s[1].reduce((a, g) => a + g[1].filter(o => qty[g[0] + '|' + o[0]]).length, 0), b = $('c' + i).querySelector('b'); if (b) b.remove(); if (n) $('c' + i).querySelector('summary').insertAdjacentHTML('beforeend', '<b>' + n + '</b>'); }); }
+CARTA.forEach((s, i) => {
+  const d = document.createElement('details'); d.id = 'c' + i; d.innerHTML = '<summary><span>' + s[0] + '</span></summary>'; const w = document.createElement('div'); w.className = 'g';
+  s[1].forEach(g => { w.insertAdjacentHTML('beforeend', '<h4>' + g[0] + '</h4>'); g[1].forEach(o => { const k = g[0] + '|' + o[0], r = document.createElement('div'); r.className = 'it'; r.innerHTML = '<span>' + o[0] + '</span><em>' + eur(o[1]) + '</em><div class="q"><button type="button" aria-label="Menos">−</button><i>0</i><button type="button" aria-label="Más">+</button></div>'; const [m, p] = r.querySelectorAll('button'), n = r.querySelector('i'); const set = v => { qty[k] = Math.max(0, Math.min(99, v)); n.textContent = qty[k]; r.classList.toggle('on', qty[k] > 0); paint(); }; m.onclick = () => set((qty[k] || 0) - 1); p.onclick = () => set((qty[k] || 0) + 1); w.appendChild(r); }); });
+  d.appendChild(w); $('carta').appendChild(d);
+});
+$('c0').open = true;
 if (q.get('e')) { $('e').value = q.get('e'); $('pill').textContent = '🥐 Pedido para ' + q.get('e'); }
-ITEMS.forEach(t => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.onclick = () => { sel.has(t) ? sel.delete(t) : sel.add(t); b.classList.toggle('on'); }; $('chips').appendChild(b); });
 for (let m = 7 * 60 + 30; m <= 19 * 60; m += 30) { const o = document.createElement('option'), t = String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); o.value = o.textContent = t; if (t === '09:00') o.selected = true; $('h').appendChild(o); }
 const day = n => { const d = new Date(Date.now() + n * 864e5); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
 $('d').min = day(1); $('d').value = day(2);
@@ -113,14 +139,15 @@ $('f').onsubmit = async ev => {
   if (p.replace(/\D/g, '').length < 9) return fail('Escribe un móvil válido para confirmarte el pedido.');
   if (!e) return fail('Escribe el nombre de la empresa.');
   if (!$('d').value || $('d').value < day(1)) return fail('Elige un día a partir de mañana.');
-  if (!sel.size && !$('z').value.trim()) return fail('Elige qué os apetece o cuéntanoslo abajo.');
-  const pedido = Array.from(sel).join(', ') || 'Lo cuento en las notas';
+  const L = lines(), total = L.reduce((a, x) => a + x.v, 0);
+  if (!L.length && !$('z').value.trim()) return fail('Elige algo de la carta o cuéntanoslo abajo.');
+  const pedido = L.length ? L.map(x => x.t).join('\n') + '\nTotal aprox. ' + eur(total) : 'Lo cuento en las notas';
   const x = /Recogida/.test(mode) ? mode : (($('x').value.trim()) || mode);
   const when = nice($('d').value) + ' a las ' + $('h').value;
   $('go').disabled = true; $('go').textContent = 'Enviando…';
   let id = '';
   if (SCRIPT) {
-    const u = SCRIPT + '?' + new URLSearchParams({ a: 'co', i: q.get('i') || '', t: q.get('t') || '', e: e, n: n, p: p, d: $('d').value + 'T' + $('h').value, g: g, o: pedido, x: x, z: $('z').value.trim() });
+    const u = SCRIPT + '?' + new URLSearchParams({ a: 'co', i: q.get('i') || '', t: q.get('t') || '', e: e, n: n, p: p, d: $('d').value + 'T' + $('h').value, g: g, o: pedido, m: L.length ? total.toFixed(2) : '', x: x, z: $('z').value.trim() });
     try { const r = await (await fetch(u, { credentials: 'omit' })).json(); if (r && r.ok && r.id) id = r.id; } catch (er) { /* sin conexión con la hoja: seguimos por WhatsApp */ }
   }
   const msg = 'Hola Xavi, soy ' + n + ' de ' + e + '. Quiero pedir catering para ' + g + ' personas el ' + when + '.\n' + pedido + '\n' + x + ($('z').value.trim() ? '\nNotas: ' + $('z').value.trim() : '') + (id ? '\n(Pedido ' + id + ')' : '');
