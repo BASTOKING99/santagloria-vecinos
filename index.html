@@ -23,6 +23,8 @@
   .hint{font-size:13px;color:#737370;margin-bottom:26px}
   .legal{max-width:380px;margin:0 auto 22px;font-size:11px;line-height:1.5;color:#8d887d}
   .valid{margin-top:10px;padding-top:9px;border-top:1px solid #EFE9DD;font-size:12.5px;font-weight:600;color:#9A5B04}
+  .cat{display:block;text-decoration:none;color:#1C3152;background:#fff;border:1px solid #E8E2D9;border-radius:16px;padding:14px 18px;margin:0 auto 24px;max-width:380px}
+  .cat b{display:block;font:700 15px Jost,sans-serif}.cat span{font-size:13.5px;color:#9A5B04;font-weight:600}.cat em{font-style:normal}
   footer{border-top:1px solid #E8E2D9;padding-top:16px;font-size:13px;color:#737370;line-height:1.5}
   footer strong{display:block;margin-top:6px}
 </style></head>
@@ -50,6 +52,8 @@
 <div class="code"><small>Vuestro código</small><b id="code">SG272</b><div class="valid" id="valid" style="display:none"></div></div>
 <p class="hint" id="hint">Enséñalo en caja antes de pagar</p>
 <p class="legal" id="legal"></p>
+<a class="cat" id="cat" href="catering/">
+<b>¿Reunión o desayuno de equipo?</b><span>Pide catering en 1 minuto <em>→</em></span></a>
 <footer>Santagloria Coffee &amp; Bakery · Gran Via de les Corts Catalanes, 272 (Sants-Montjuïc)
 <strong>Horario: Lunes a Viernes de 7:00 a 20:30h · Sábados y Domingos de 8:00 a 20:30h</strong></footer>
 </main>
@@ -2425,6 +2429,10 @@ if (q.get('r')) {
   $('qr').innerHTML = fancyQr(q.get('r'), 320); $('qr').style.display = 'block';
   $('hint').textContent = 'Enseña este QR en caja: la barista lo escanea y se aplica tu 10%';
 }
+// enlace de catering con la empresa ya rellenada (y el pase, si lo trae, para saber quién pide)
+{ const cp = new URLSearchParams(); if (q.get('e')) cp.set('e', q.get('e'));
+  try { const ru = new URL(q.get('r')); if (ru.searchParams.get('i')) { cp.set('i', ru.searchParams.get('i')); cp.set('t', ru.searchParams.get('t')); } } catch (e) { /* sin QR */ }
+  $('cat').href = 'https://bastoking99.github.io/santagloria-vecinos/catering/' + (cp.toString() ? '?' + cp : ''); }
 // PDF de una sola página: el tamaño de página se ajusta a la altura real del contenido
 const pg = document.createElement('style'); document.head.appendChild(pg);
 function fit() { const h = Math.ceil(document.body.scrollHeight); pg.textContent = '@page{size:560px ' + (h + 2) + 'px;margin:0}@media print{body{height:' + h + 'px;overflow:hidden}}'; }

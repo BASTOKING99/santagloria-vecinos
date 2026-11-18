@@ -35,6 +35,13 @@ else {
   window.__r = r => {
     if (!r || !r.ok) return show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
     const co = r.empresa || q.get('e') || '';
+    if (r.fila > 1) { $('tk').style.display = 'block'; $('tkb').onclick = () => {
+      const v = $('amt').value.trim().replace(',', '.'); if (!(parseFloat(v) > 0)) { $('tkm').textContent = 'Escribe el importe, por ejemplo 12,40'; return; }
+      $('tkb').disabled = true;
+      fetch(SCRIPT + '?a=m&i=' + encodeURIComponent(q.get('i')) + '&t=' + encodeURIComponent(q.get('t')) + '&f=' + r.fila + '&m=' + encodeURIComponent(v), { credentials: 'omit' }).then(x => x.json()).then(j => {
+        if (j && j.ok) { $('tkm').className = 'tkm ok'; $('tkm').textContent = '✓ Apuntado: ' + String(j.importe).replace('.', ',') + ' €'; $('amt').disabled = true; }
+        else { $('tkb').disabled = false; $('tkm').textContent = (j && j.error) || 'No se ha podido apuntar'; }
+      }).catch(() => { $('tkb').disabled = false; $('tkm').textContent = 'No se ha podido apuntar. Inténtalo otra vez.'; }); }; }
     if (r.repetido) show('w', 'Ya escaneado hace un momento', co, 'No se vuelve a contar. Hoy: <b>' + r.hoy + '</b> · Total: <b>' + r.total + '</b>', true);
     else show('', 'Pase válido', co, 'Escaneo nº <b>' + r.hoy + '</b> de hoy · Total: <b>' + r.total + '</b>', true);
   };
