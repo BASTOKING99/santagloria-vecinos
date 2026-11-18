@@ -40,7 +40,8 @@ else {
   };
   const s = document.createElement('script');
   s.src = SCRIPT + '?a=r&i=' + encodeURIComponent(q.get('i')) + '&t=' + encodeURIComponent(q.get('t')) + '&e=' + encodeURIComponent(q.get('e') || '') + '&v=' + encodeURIComponent(q.get('v') || '') + '&cb=__r';
+  // fetch sin cookies: con varias cuentas de Google abiertas, el <script> con cookies falla; sin cookies siempre entra
   s.onerror = () => window.__r(null);
-  document.body.appendChild(s);
+  fetch(s.src.replace('&cb=__r', ''), { credentials: 'omit' }).then(x => x.json()).then(window.__r).catch(() => document.body.appendChild(s));
 }
 </script></body></html>
