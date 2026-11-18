@@ -5,7 +5,8 @@
 <title>Santagloria · Club Vecinos</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @page{size:A5;margin:0}
+  @page{size:560px 1100px;margin:0}
+  @media print{html,body{width:560px}body{min-height:0}}
   *{box-sizing:border-box;margin:0}
   body{font-family:Jost,Futura,'Century Gothic',system-ui,sans-serif;background:#FAF8F5;color:#1D1D1B;min-height:100vh;-webkit-print-color-adjust:exact;print-color-adjust:exact;display:flex;justify-content:center;padding:28px 20px;text-align:center}
   main{width:100%;max-width:420px}
@@ -2424,5 +2425,10 @@ if (q.get('r')) {
   $('qr').innerHTML = fancyQr(q.get('r'), 320); $('qr').style.display = 'block';
   $('hint').textContent = 'Enseña este QR en caja: la barista lo escanea y se aplica tu 10%';
 }
+// PDF de una sola página: el tamaño de página se ajusta a la altura real del contenido
+const pg = document.createElement('style'); document.head.appendChild(pg);
+function fit() { const h = Math.ceil(document.body.scrollHeight); pg.textContent = '@page{size:560px ' + (h + 2) + 'px;margin:0}@media print{body{height:' + h + 'px;overflow:hidden}}'; }
 $('pill').textContent = w > 0 ? '📍 A solo ' + w + (w === 1 ? ' minuto' : ' minutos') + ' caminando' + (d > 0 ? ' (' + d + ' m de vuestra oficina)' : '') : '📍 Vuestros vecinos en Gran Via 272';
+fit(); (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(fit, 300));
+window.addEventListener('beforeprint', fit);
 </script></body></html>
