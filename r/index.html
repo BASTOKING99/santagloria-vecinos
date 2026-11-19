@@ -12,43 +12,77 @@
   .ic svg{width:52px;height:52px;fill:none;stroke:#1F9D63;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:d .5s .15s ease-out forwards}
   @keyframes d{to{stroke-dashoffset:0}}
   .w .ic{background:#FDEBD0}.w .ic svg{stroke:#C27700}.e .ic{background:#EEE}.e .ic svg{stroke:#737370}
-  .l .ic svg{animation:none;stroke-dashoffset:0;opacity:.25}
+  .x .ic{background:#FCE9E7}.x .ic svg{stroke:#B4382B}
+  .l .ic{background:#F1ECE2}.l .ic svg{animation:none;stroke-dashoffset:0;stroke:#1C3152;opacity:.35}
   small{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#737370}
   h1{font-family:Fraunces,'Cooper Black',Georgia,serif;font-size:34px;line-height:1.08;font-weight:800;color:#1C3152;margin:8px 0 6px}
   .dto{display:inline-block;margin:10px 0 24px;background:#1D1D1B;color:#fff;font-weight:700;font-size:15px;padding:9px 18px;border-radius:999px}
-  .x .ic{background:#FCE9E7}.x .ic svg{stroke:#B4382B}
   .n{font-size:14px;color:#737370}.n b{color:#1D1D1B}
+  .btn{display:block;width:100%;border:0;border-radius:16px;background:#1C3152;color:#fff;font:700 18px Jost,sans-serif;padding:18px 20px;cursor:pointer;margin:6px 0 14px}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn.sec{background:#F1ECE2;color:#1C3152}
+  #tk{display:none;margin-top:22px;text-align:left;background:#fff;border-radius:18px;padding:16px;box-shadow:0 1px 2px rgba(60,40,10,.05),0 12px 32px -16px rgba(60,40,10,.22)}
+  #tk label{font-size:13px;font-weight:700;color:#737370}
+  #amt{width:100%;margin:8px 0 10px;font:600 20px Jost,sans-serif;padding:12px 14px;border:1px solid #DDD6C8;border-radius:12px;background:#FAF8F5}
+  .tkm{font-size:14px;color:#B4382B;margin-top:8px;min-height:18px}.tkm.ok{color:#1F9D63;font-weight:700}
 </style></head>
 <body><main id="m" class="l">
-<div class="ic"><svg viewBox="0 0 24 24"><path id="p" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-<small id="k">Validando…</small><h1 id="h">Un momento</h1>
+<div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+<small id="k">Pase Santagloria</small><h1 id="h"></h1>
 <div class="dto" id="d" style="display:none">10% de descuento</div>
 <p class="n" id="n"></p>
+<button class="btn" id="go" style="display:none">Soy la camarera · Validar</button>
+<div id="tk">
+  <label for="amt">Importe del ticket (€)</label>
+  <input id="amt" inputmode="decimal" placeholder="12,40" autocomplete="off">
+  <button class="btn sec" id="tkb" style="margin:0">Apuntar importe</button>
+  <div class="tkm" id="tkm"></div>
+</div>
 </main>
 <script>
 const SCRIPT = "https://script.google.com/macros/s/AKfycbyqPQXWVfQGe0Kj3juiRFQRmHte_CDDWLREiBmKyhgcuLFIaL4s43OTSH3rgy_8lrajMw/exec";
 const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
+const empresa = q.get('e') || '';
 function show(cls, k, h, n, dto) { $('m').className = cls; $('k').textContent = k; $('h').textContent = h; $('n').innerHTML = n || ''; $('d').style.display = dto ? 'inline-block' : 'none'; }
-if (q.get('v') && new Date().toISOString().slice(0, 10) > q.get('v')) show('x', 'Pase caducado', q.get('e') || '', 'Caducó el ' + q.get('v').split('-').reverse().join('/') + '. No se aplica el descuento.');
-else if (!SCRIPT || !q.get('i') || !q.get('t')) show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
-else {
-  window.__r = r => {
-    if (!r || !r.ok) return show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
-    const co = r.empresa || q.get('e') || '';
-    if (r.fila > 1) { $('tk').style.display = 'block'; $('tkb').onclick = () => {
-      const v = $('amt').value.trim().replace(',', '.'); if (!(parseFloat(v) > 0)) { $('tkm').textContent = 'Escribe el importe, por ejemplo 12,40'; return; }
-      $('tkb').disabled = true;
-      fetch(SCRIPT + '?a=m&i=' + encodeURIComponent(q.get('i')) + '&t=' + encodeURIComponent(q.get('t')) + '&f=' + r.fila + '&m=' + encodeURIComponent(v), { credentials: 'omit' }).then(x => x.json()).then(j => {
-        if (j && j.ok) { $('tkm').className = 'tkm ok'; $('tkm').textContent = '✓ Apuntado: ' + String(j.importe).replace('.', ',') + ' €'; $('amt').disabled = true; }
-        else { $('tkb').disabled = false; $('tkm').textContent = (j && j.error) || 'No se ha podido apuntar'; }
-      }).catch(() => { $('tkb').disabled = false; $('tkm').textContent = 'No se ha podido apuntar. Inténtalo otra vez.'; }); }; }
-    if (r.repetido) show('w', 'Ya escaneado hace un momento', co, 'No se vuelve a contar. Hoy: <b>' + r.hoy + '</b> · Total: <b>' + r.total + '</b>', true);
-    else show('', 'Pase válido', co, 'Escaneo nº <b>' + r.hoy + '</b> de hoy · Total: <b>' + r.total + '</b>', true);
+// fetch sin cookies (con varias cuentas de Google abiertas el <script> con cookies falla) y con tiempo máximo, para no quedarse nunca en "Validando…"
+function api(params) {
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 15000);
+  return fetch(SCRIPT + '?' + new URLSearchParams(params), { credentials: 'omit', signal: c.signal }).then(x => x.json()).finally(() => clearTimeout(t));
+}
+function fail() {
+  show('e', 'No se ha podido validar', empresa, 'Aplica el 10% a mano y avisa a Xavi.');
+  $('go').style.display = 'block'; $('go').disabled = false; $('go').textContent = 'Reintentar';
+}
+function ticket(fila) {
+  if (!(fila > 1)) return;
+  $('tk').style.display = 'block';
+  $('tkb').onclick = () => {
+    const v = $('amt').value.trim().replace(',', '.');
+    if (!(parseFloat(v) > 0)) { $('tkm').className = 'tkm'; $('tkm').textContent = 'Escribe el importe, por ejemplo 12,40'; return; }
+    $('tkb').disabled = true;
+    api({ a: 'm', i: q.get('i'), t: q.get('t'), f: fila, m: v }).then(j => {
+      if (j && j.ok) { $('tkm').className = 'tkm ok'; $('tkm').textContent = '✓ Apuntado: ' + String(j.importe).replace('.', ',') + ' €'; $('amt').disabled = true; }
+      else { $('tkb').disabled = false; $('tkm').className = 'tkm'; $('tkm').textContent = (j && j.error) || 'No se ha podido apuntar'; }
+    }).catch(() => { $('tkb').disabled = false; $('tkm').className = 'tkm'; $('tkm').textContent = 'No se ha podido apuntar. Inténtalo otra vez.'; });
   };
-  const s = document.createElement('script');
-  s.src = SCRIPT + '?a=r&i=' + encodeURIComponent(q.get('i')) + '&t=' + encodeURIComponent(q.get('t')) + '&e=' + encodeURIComponent(q.get('e') || '') + '&v=' + encodeURIComponent(q.get('v') || '') + '&cb=__r';
-  // fetch sin cookies: con varias cuentas de Google abiertas, el <script> con cookies falla; sin cookies siempre entra
-  s.onerror = () => window.__r(null);
-  fetch(s.src.replace('&cb=__r', ''), { credentials: 'omit' }).then(x => x.json()).then(window.__r).catch(() => document.body.appendChild(s));
+}
+function result(r) {
+  if (!r || !r.ok) return fail();
+  $('go').style.display = 'none';
+  const co = r.empresa || empresa;
+  if (r.repetido) show('w', 'Ya escaneado hace un momento', co, 'No se vuelve a contar. Hoy: <b>' + r.hoy + '</b> · Total: <b>' + r.total + '</b>', true);
+  else show('', 'Pase válido', co, 'Escaneo nº <b>' + r.hoy + '</b> de hoy · Total: <b>' + r.total + '</b>', true);
+  try { ticket(r.fila); } catch (e) {}
+}
+if (q.get('v') && new Date().toISOString().slice(0, 10) > q.get('v')) show('x', 'Pase caducado', empresa, 'Caducó el ' + q.get('v').split('-').reverse().join('/') + '. No se aplica el descuento.');
+else if (!q.get('i') || !q.get('t')) show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
+else {
+  // El escaneo solo se cuenta cuando la camarera pulsa el botón (un cliente que abre el enlace no suma).
+  show('l', 'Pase Santagloria', empresa, 'Para el equipo de <b>' + empresa.replace(/[<>&]/g, '') + '</b>.<br>Camarera: pulsa para validar el pase.', true);
+  $('go').style.display = 'block';
+  $('go').onclick = () => {
+    $('go').disabled = true; $('go').textContent = 'Validando…';
+    api({ a: 'r', i: q.get('i'), t: q.get('t'), e: empresa, v: q.get('v') || '' }).then(result).catch(fail);
+  };
 }
 </script></body></html>
