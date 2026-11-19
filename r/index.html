@@ -18,7 +18,9 @@
   h1{font-family:Fraunces,'Cooper Black',Georgia,serif;font-size:34px;line-height:1.08;font-weight:800;color:#1C3152;margin:8px 0 6px}
   .dto{display:inline-block;margin:10px 0 24px;background:#1D1D1B;color:#fff;font-weight:700;font-size:15px;padding:9px 18px;border-radius:999px}
   .n{font-size:14px;color:#737370}.n b{color:#1D1D1B}
-  .btn{display:block;width:100%;border:0;border-radius:16px;background:#1C3152;color:#fff;font:700 18px Jost,sans-serif;padding:18px 20px;cursor:pointer;margin:6px 0 14px}
+  #gw{margin-top:44px;padding-top:22px;border-top:1px solid #E6DFD2}
+  .stf{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8A8578;margin-bottom:14px}
+  .btn{display:block;width:100%;border:0;border-radius:14px;background:#1C3152;color:#fff;font:600 17px Jost,sans-serif;letter-spacing:.02em;padding:17px 20px;cursor:pointer;margin:0}
   .btn:disabled{opacity:.55;cursor:default}
   .btn.sec{background:#F1ECE2;color:#1C3152}
   #tk{display:none;margin-top:22px;text-align:left;background:#fff;border-radius:18px;padding:16px;box-shadow:0 1px 2px rgba(60,40,10,.05),0 12px 32px -16px rgba(60,40,10,.22)}
@@ -31,7 +33,8 @@
 <small id="k">Pase Santagloria</small><h1 id="h"></h1>
 <div class="dto" id="d" style="display:none">10% de descuento</div>
 <p class="n" id="n"></p>
-<button class="btn" id="go" style="display:none">Soy la camarera · Validar</button>
+<div id="gw" style="display:none"><div class="stf">Uso exclusivo del personal de Santagloria</div>
+<button class="btn" id="go">Validar pase</button></div>
 <div id="tk">
   <label for="amt">Importe del ticket (€)</label>
   <input id="amt" inputmode="decimal" placeholder="12,40" autocomplete="off">
@@ -51,7 +54,7 @@ function api(params) {
 }
 function fail() {
   show('e', 'No se ha podido validar', empresa, 'Aplica el 10% a mano y avisa a Xavi.');
-  $('go').style.display = 'block'; $('go').disabled = false; $('go').textContent = 'Reintentar';
+  $('gw').style.display = 'block'; $('go').disabled = false; $('go').textContent = 'Reintentar';
 }
 function ticket(fila) {
   if (!(fila > 1)) return;
@@ -68,7 +71,7 @@ function ticket(fila) {
 }
 function result(r) {
   if (!r || !r.ok) return fail();
-  $('go').style.display = 'none';
+  $('gw').style.display = 'none';
   const co = r.empresa || empresa;
   if (r.repetido) show('w', 'Ya escaneado hace un momento', co, 'No se vuelve a contar. Hoy: <b>' + r.hoy + '</b> · Total: <b>' + r.total + '</b>', true);
   else show('', 'Pase válido', co, 'Escaneo nº <b>' + r.hoy + '</b> de hoy · Total: <b>' + r.total + '</b>', true);
@@ -78,8 +81,8 @@ if (q.get('v') && new Date().toISOString().slice(0, 10) > q.get('v')) show('x', 
 else if (!q.get('i') || !q.get('t')) show('e', 'Pase', 'No se ha podido validar', 'Aplica el 10% a mano y avisa a Xavi.');
 else {
   // El escaneo solo se cuenta cuando la camarera pulsa el botón (un cliente que abre el enlace no suma).
-  show('l', 'Pase Santagloria', empresa, 'Para el equipo de <b>' + empresa.replace(/[<>&]/g, '') + '</b>.<br>Camarera: pulsa para validar el pase.', true);
-  $('go').style.display = 'block';
+  show('l', 'Pase Santagloria', empresa, 'Descuento exclusivo para el equipo de <b>' + empresa.replace(/[<>&]/g, '') + '</b>', true);
+  $('gw').style.display = 'block';
   $('go').onclick = () => {
     $('go').disabled = true; $('go').textContent = 'Validando…';
     api({ a: 'r', i: q.get('i'), t: q.get('t'), e: empresa, v: q.get('v') || '' }).then(result).catch(fail);
